@@ -78,3 +78,4 @@ _[Ss]cripts
 CV-Site MVC/.vs/CV-Site MVC/xs/UserPrefs.xml
 CV-Site MVC/.vs/CV-Site MVC/config/applicationhost.config
 .DS_Store
+*.vsidx
