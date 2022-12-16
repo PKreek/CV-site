@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualBasic;
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CV_Site_MVC.Models
@@ -9,6 +10,6 @@ namespace CV_Site_MVC.Models
         public int Id { get; set; }
         public string ProjectName { get; set; }
         public string Description { get; set; }
-        public DateAndTime StartDate { get; set; }
+        public DateTime StartDate { get; set; }
     }
 }
