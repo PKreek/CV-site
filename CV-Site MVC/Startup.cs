@@ -28,7 +28,7 @@ namespace CV_Site_MVC
             services.AddControllersWithViews();
 
             services.AddDbContext<SiteContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("SiteContextConnectionString")));
+            options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("SiteContextConnectionString")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
