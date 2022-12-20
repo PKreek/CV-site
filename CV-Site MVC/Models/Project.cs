@@ -11,5 +11,10 @@ namespace CV_Site_MVC.Models
         public string ProjectName { get; set; }
         public string Description { get; set; }
         public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public int UserId { get; set; }
+
+        [ForeignKey(nameof(UserId))]
+        public virtual User user { get; set; }
     }
 }
