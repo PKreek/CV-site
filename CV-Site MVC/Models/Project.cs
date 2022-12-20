@@ -15,6 +15,6 @@ namespace CV_Site_MVC.Models
         public int UserId { get; set; }
 
         [ForeignKey(nameof(UserId))]
-        public virtual User user { get; set; }
+        public virtual User User { get; set; }
     }
 }
