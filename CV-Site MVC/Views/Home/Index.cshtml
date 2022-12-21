@@ -2,7 +2,9 @@
 
 @model List<Project>
 
-<table class="table-bordered">
+	<div>
+		<h3>Projekt</h3>
+		<table class="table-bordered">
 	<thead>
 		<tr>
 			<td>Id</td>
@@ -12,17 +14,22 @@
 		</tr>
 	</thead>
 	<tbody>
-		@foreach (var prod in Model)
-		{
-			<tr>
-				<td>@prod.Id</td>
-				<td>@prod.ProjectName</td>
-				<td>@prod.Description</td>
-				<td>@prod.StartDate</td>
-			</tr>
-		}
+			@foreach (var prod in Model)
+			{
+				<tr>
+					<td>@prod.Id</td>
+					<td>@prod.ProjectName</td>
+					<td>@prod.Description</td>
+					<td>@prod.StartDate</td>
+				</tr>
+			}
 	</tbody>
 </table>
+	</div>
+	<div>
+		<h3>CV</h3>
+	</div>
+
 
 @*@{
 	ViewData["Title"] = "Home Page";
