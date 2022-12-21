@@ -35,6 +35,11 @@ namespace CV_Site_MVC.Controllers
             return View(listOfProjects);
         }
 
+        public IActionResult Profil()
+        {
+            return View();
+        }
+
         //public IActionResult Privacy()
         //{
         //    return View();
