@@ -10,9 +10,9 @@ namespace CV_Site_MVC.Models
         public int CVID { get; set; }
 
         [ForeignKey (nameof(WorkID))]
-        public Work Work { get; set; }
+        public virtual Work Work { get; set; }
 
         [ForeignKey(nameof (CVID))]
-        public CV Cv { get; set; }
+        public virtual CV Cv { get; set; }
     }
 }

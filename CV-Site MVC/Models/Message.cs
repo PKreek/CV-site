@@ -9,8 +9,8 @@ namespace CV_Site_MVC.Models
         public int Id { get; set; }
         public string Text { get; set; }
         public DateTime Date { get; set; }
-        public int SentTo { get; set; }
-        public int SentFrom { get; set; }
+        public string SentTo { get; set; }
+        public string SentFrom { get; set; }
 
         [ForeignKey(nameof(SentTo))]
         public virtual User Message_Reciever  { get; set; }
