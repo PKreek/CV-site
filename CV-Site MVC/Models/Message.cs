@@ -13,7 +13,7 @@ namespace CV_Site_MVC.Models
         public int SentFrom { get; set; }
 
         [ForeignKey(nameof(SentTo))]
-        public virtual User Message_Reciver  { get; set; }
+        public virtual User Message_Reciever  { get; set; }
 
         [ForeignKey(nameof(SentFrom))]
         public virtual User Message_Sender { get; set; }
