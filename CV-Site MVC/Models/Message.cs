@@ -3,7 +3,7 @@ using System;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace CV_Site_MVC.Models
 {
-    public class Messages
+    public class Message
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }

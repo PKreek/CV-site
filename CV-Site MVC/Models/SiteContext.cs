@@ -15,6 +15,13 @@ namespace CV_Site_MVC.Models
         public DbSet<Project> Projects { get; set; }
         public DbSet<IdentityUser> Users { get; set; }
 
+        public DbSet<Work> Works { get; set; }
+
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<Work_CV> Work_CVs { get; set; }
+        public DbSet<Project_User> Project_Users { get; set; }
+        public DbSet<CV> cVs { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

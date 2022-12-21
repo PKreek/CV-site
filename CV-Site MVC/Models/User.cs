@@ -14,10 +14,10 @@ namespace CV_Site_MVC.Models
         public string LastName { get; set; }
 
         [InverseProperty("Message_Sender")]
-        public virtual IEnumerable<Messages> Sender { get; set; }
+        public virtual IEnumerable<Message> Sender { get; set; }
 
         [InverseProperty("Message_Reciever")]
-        public virtual IEnumerable<Messages> Reciever { get; set; }
+        public virtual IEnumerable<Message> Reciever { get; set; }
         //Password?
 
     }
