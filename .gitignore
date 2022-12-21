@@ -90,3 +90,5 @@ CV-Site MVC/Migrations/20221221100707_jj.cs
 CV-Site MVC/appsettings.json
 CV-Site MVC/appsettings.json
 CV-Site MVC/appsettings.json
+CV-Site MVC/Migrations/20221221140911_InitialMigration.cs
+CV-Site MVC/Migrations/20221221140911_InitialMigration.Designer.cs
