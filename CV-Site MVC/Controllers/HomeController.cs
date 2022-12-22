@@ -1,4 +1,5 @@
 ﻿using CV_Site_MVC.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -21,6 +22,7 @@ namespace CV_Site_MVC.Controllers
 
 
 
+
         //private readonly ILogger<HomeController> _logger;
 
         //public HomeController(ILogger<HomeController> logger)
@@ -28,12 +30,15 @@ namespace CV_Site_MVC.Controllers
         //    _logger = logger;
         //}
 
+        [Authorize]
         public IActionResult Index()
         {
             List<Project> listOfProjects = _dbContext.Projects.ToList();
             ViewBag.Message = "Hej";
             return View(listOfProjects);
         }
+
+
 
         public IActionResult Profil()
         {

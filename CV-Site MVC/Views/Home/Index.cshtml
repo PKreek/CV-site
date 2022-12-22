@@ -30,6 +30,12 @@
 		<h3>CV</h3>
 	</div>
 
+	<AuthorizeView>
+		<Authorized>
+			<h2> You are logged in as @User.Identity.Name</h2>
+			<a asp-controller="Account" asp-action="LogOut" class="btn-link">Log out</a>
+		</Authorized>
+	</AuthorizeView>
 
 @*@{
 	ViewData["Title"] = "Home Page";
