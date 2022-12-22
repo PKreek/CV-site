@@ -30,7 +30,7 @@ namespace CV_Site_MVC.Controllers
         //    _logger = logger;
         //}
 
-        //[Authorize]
+        [Authorize]
         public IActionResult Index()
         {
             List<Project> listOfProjects = _dbContext.Projects.ToList();
