@@ -30,12 +30,17 @@
 		<h3>CV</h3>
 	</div>
 
+
+
+<form method="post" asp-controller="Account" asp-action="LogOut">
 	<AuthorizeView>
 		<Authorized>
 			<h2> You are logged in as @User.Identity.Name</h2>
-			<a asp-controller="Account" asp-action="LogOut" class="btn-link">Log out</a>
+			<input type="submit" value ="Log out"/>
 		</Authorized>
 	</AuthorizeView>
+</form>
+
 
 @*@{
 	ViewData["Title"] = "Home Page";

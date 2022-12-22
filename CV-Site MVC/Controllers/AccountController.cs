@@ -28,7 +28,7 @@ namespace CV_Site_MVC.Controllers
             return View();
         }
 
-
+        
         [HttpPost]
         public async Task<IActionResult> Register(UserRegisterViewModel userRegister)
         {
@@ -47,7 +47,22 @@ namespace CV_Site_MVC.Controllers
             return View(userRegister);
         }
 
+        [HttpPost]
+        public async Task<IActionResult>LogIn(LogInViewModel loginView)
+        {
+            if(ModelState.IsValid)
+            {
+                var result = await logInManager.PasswordSignInAsync(loginView.UserName, loginView.PassWord, 
+                    isPersistent: loginView.RememberMe, lockoutOnFailure: false);
 
+
+                    if(result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return View(loginView);
+        }
 
         [HttpPost]
         public async Task<IActionResult> LogOut()
