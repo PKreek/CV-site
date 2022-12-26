@@ -12,6 +12,10 @@ namespace CV_Site_MVC.Models
         //public int UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        //public virtual CV Cv { get; set; }
+
+
+      
 
         [InverseProperty("Message_Sender")]
         public virtual IEnumerable<Message> Sender { get; set; }
