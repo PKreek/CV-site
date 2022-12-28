@@ -12,7 +12,11 @@ namespace CV_Site_MVC.Models
         public string Utbildning { get; set; }
         //public string IdentityID { get; set; }
 
-        
+        public string UserID { get; set; }
+
+        [ForeignKey(nameof(UserID))]
+        public virtual User User { get; set; }
+
         //[ForeignKey(nameof(IdentityID))]
         //public virtual User Owner { get; set; }
         public virtual IEnumerable<Work_CV> Work_CV { get; set; } = new List<Work_CV>();
