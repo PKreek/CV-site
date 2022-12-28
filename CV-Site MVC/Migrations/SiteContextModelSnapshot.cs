@@ -32,6 +32,13 @@ namespace CV_Site_MVC.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("cVs");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 2,
+                            Utbildning = "Ekonomi"
+                        });
                 });
 
             modelBuilder.Entity("CV_Site_MVC.Models.Message", b =>
@@ -281,11 +288,11 @@ namespace CV_Site_MVC.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1e938ecc-ac36-445f-8390-4164e1b10b18",
+                            ConcurrencyStamp = "bd5f1989-f67e-4c4d-8b59-6499e04e151c",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fc408dfb-e699-430c-9272-d2693bdd85a6",
+                            SecurityStamp = "b640b896-ccee-4843-a9f9-017b1ce5a45b",
                             TwoFactorEnabled = false,
                             UserName = "Patte1337"
                         });
