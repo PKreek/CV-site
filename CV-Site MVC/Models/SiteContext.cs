@@ -56,11 +56,11 @@ namespace CV_Site_MVC.Models
 
             modelBuilder.Entity<CV>().HasData(
                 new CV
-                {
+               {
                    ID = 2,
                    Utbildning = "Ekonomi"
-                }
-                );
+               }
+               );
         }
     }
 }
