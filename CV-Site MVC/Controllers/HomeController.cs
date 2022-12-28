@@ -30,7 +30,7 @@ namespace CV_Site_MVC.Controllers
         //    _logger = logger;
         //}
 
-        [Authorize]
+        
         public IActionResult Index()
         {
             List<Project> projectList = _dbContext.Projects.ToList();
@@ -42,7 +42,7 @@ namespace CV_Site_MVC.Controllers
         }
 
 
-
+        [Authorize]
         public IActionResult Profil()
         {
             return View();

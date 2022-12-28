@@ -58,7 +58,7 @@ namespace CV_Site_MVC.Controllers
 
                     if(result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Profil", "Home");
                 }
             }
             return View(loginView);
