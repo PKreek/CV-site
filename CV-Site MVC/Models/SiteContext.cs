@@ -53,8 +53,9 @@ namespace CV_Site_MVC.Models
                 //    StartDate = new System.DateTime(2022 / 12 / 16)
                 }
                 );
-                modelBuilder.Entity<CV>().HasData(
-               new CV
+
+            modelBuilder.Entity<CV>().HasData(
+                new CV
                {
                    ID = 2,
                    Utbildning = "Ekonomi"

@@ -1,6 +1,6 @@
-﻿
-
-@model List<CV>
+﻿@addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
+@using CV_Site_MVC.Models
+@model IndexViewModel
 
 	<div>
 		<h3>CV</h3>
@@ -14,7 +14,7 @@
 		</tr>
 	</thead>
 	<tbody>
-			@foreach (var cV in Model)
+			@foreach (CV cV in Model.listOfCV)
 			{
 				<tr>
 					<td>@cV.ID</td>
@@ -26,6 +26,36 @@
 	</tbody>
 </table>
 	</div>
+<div>
+	<h3>Project</h3>
+	<table class="table-bordered">
+		<thead>
+			<tr>
+				<td>Id</td>
+				<td>ProjectName</td>
+				<td>Description</td>
+				<td>StartDate</td>
+				<td>EndDate</td>
+				@*<td>Description</td>
+				<td>Start date</td>*@
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (Project project in Model.listOfProjects)
+			{
+				<tr>
+					<td>@project.Id</td>
+					<td>@project.ProjectName</td>
+					<td>@project.Description</td>
+					<td>@project.StartDate</td>
+					<td>@project.EndDate</td>
+					@*	<td>@prod.Description</td>
+				<td>@prod.StartDate</td>*@
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>
 
 
 

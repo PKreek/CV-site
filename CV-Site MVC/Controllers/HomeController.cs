@@ -33,8 +33,12 @@ namespace CV_Site_MVC.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            List<CV> listOfCV = _dbContext.cVs.ToList();
-            return View(listOfCV);
+            List<Project> projectList = _dbContext.Projects.ToList();
+            List<CV> cvList = _dbContext.cVs.ToList();
+            IndexViewModel model = new IndexViewModel();
+            model.listOfProjects = projectList;
+            model.listOfCV = cvList;
+            return View(model);
         }
 
 
