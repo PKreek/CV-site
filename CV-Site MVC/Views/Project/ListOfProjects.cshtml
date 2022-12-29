@@ -1,0 +1,31 @@
+﻿@using CV_Site_MVC.Models
+@model List<Project>
+
+<h2>Lista av tillgängliga projekt att gå med i</h2>
+
+<div>
+	<table class="table-bordered">
+		<thead>
+			<tr>
+				<td>Id</td>
+				<td>Projektnamn</td>
+				<td>Beskrivning</td>
+				<td>Startdatum</td>
+				<td>Slutdatum</td>
+				
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var project in Model)
+			{
+				<tr>
+					<td>@project.Id</td>
+					<td>@project.ProjectName</td>
+					<td>@project.Description</td>
+					<td>@project.StartDate</td>
+					<td>@project.EndDate</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>
