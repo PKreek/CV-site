@@ -12,7 +12,7 @@ namespace CV_Site_MVC.Controllers
         {
                 _dbContext = dbContext;
         }
-        public IActionResult Index()
+        public IActionResult Project()
         {
             return View();
         }
