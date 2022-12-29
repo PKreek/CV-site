@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 
 namespace CV_Site_MVC.Controllers
 {
@@ -16,6 +17,8 @@ namespace CV_Site_MVC.Controllers
         }
         public IActionResult Project()
         {
+            ClaimsPrincipal currentUser = this.User;
+            var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
             return View(new Project());
         }
 
