@@ -22,7 +22,11 @@ namespace CV_Site_MVC.Controllers
 
             model.UserID = currentUserID;
 
-            model.Cv = _dbContext.cVs.Where(c => c.ID == 2).FirstOrDefault<CV>();
+            CV cv = _dbContext.cVs.Where(c => c.UserID == currentUserID).FirstOrDefault<CV>();
+
+            if (cv != null) model.Cv = cv;
+            else model.Cv = new CV();
+
             return View(model);
         }
     }
