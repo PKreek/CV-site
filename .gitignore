@@ -232,3 +232,5 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+CV-Site MVC/Migrations/20221228141450_testet.Designer.cs
+CV-Site MVC/Migrations/20221228141450_testet.cs
