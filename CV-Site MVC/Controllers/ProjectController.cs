@@ -17,14 +17,14 @@ namespace CV_Site_MVC.Controllers
         }
         public IActionResult Project()
         {
-            ClaimsPrincipal currentUser = this.User;
-            var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+           
             return View(new Project());
         }
 
         [HttpPost]
         public IActionResult Project(Project projectObject)
         {
+            projectObject.UserId = currentUserId();
             _dbContext.Projects.Add(projectObject);
             _dbContext.SaveChanges();
             return RedirectToAction("Profil","Home");
@@ -34,6 +34,12 @@ namespace CV_Site_MVC.Controllers
         {
             List<Project> projectList = _dbContext.Projects.ToList();
             return View(projectList);
+        }
+
+        private string currentUserId()
+        {
+            ClaimsPrincipal currentUser = this.User;
+            return currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
         }
     }
 }
