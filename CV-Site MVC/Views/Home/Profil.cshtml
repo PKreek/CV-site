@@ -1,14 +1,14 @@
 ﻿@model User
 
-<h1>@User.Identity.Name</h1>
+<h1>Välkommen @User.Identity.Name</h1>
 
-<form method="post" asp-controller="Account" asp-action="LogOut">
+@*<form method="post" asp-controller="Account" asp-action="LogOut">
 	<AuthorizeView>
 		<Authorized>
 			<h2> You are logged in as @User.Identity.Name</h2>
 			<input type="submit" value="Log out" />
 		</Authorized>
 	</AuthorizeView>
-</form>
+</form>*@
 
 <a asp-controller="" asp-action="Edit">Ändra din profil</a>
