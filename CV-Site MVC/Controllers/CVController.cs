@@ -17,17 +17,28 @@ namespace CV_Site_MVC.Controllers
         {
             CvViewModel model = new CvViewModel();
 
-            ClaimsPrincipal currentUser = this.User;
-            var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+            model.UserID = currentUserId();
 
-            model.UserID = currentUserID;
-
-            CV cv = _dbContext.cVs.Where(c => c.UserID == currentUserID).FirstOrDefault<CV>();
+            CV cv = _dbContext.cVs.Where(c => c.UserID == currentUserId()).FirstOrDefault<CV>();
 
             if (cv != null) model.Cv = cv;
             else model.Cv = new CV();
 
             return View(model);
+        }
+
+        public IActionResult NewCV(CV cv)
+        {
+            cv.UserID = currentUserId();
+            _dbContext.cVs.Add(cv);
+            _dbContext.SaveChanges();
+            return RedirectToAction("CV", "CV");
+        }
+
+        private string currentUserId()
+        {
+            ClaimsPrincipal currentUser = this.User;
+            return currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
         }
     }
 }
