@@ -1,7 +1,9 @@
 ﻿using CV_Site_MVC.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace CV_Site_MVC.Controllers
@@ -10,10 +12,14 @@ namespace CV_Site_MVC.Controllers
     {
         private UserManager<User> userManager;
         private SignInManager<User> logInManager;
-        public AccountController(UserManager<User> _userManager, SignInManager<User> _logInManager)
+        private SiteContext _dbContext;
+
+        public AccountController(UserManager<User> _userManager, SignInManager<User> _logInManager, SiteContext dbContext)
         {
             this.userManager = _userManager;
             this.logInManager = _logInManager;
+            _dbContext = dbContext;
+
         }
 
         [HttpGet]
@@ -70,5 +76,16 @@ namespace CV_Site_MVC.Controllers
             await logInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
+
+        [HttpGet]
+        public IActionResult Edit( int id )
+        {
+            //User user = (User)_dbContext.Users.Find(id);
+            //User user = (User)_dbContext.Users.FirstOrDefault(u => u.Id.Equals(id));
+
+            return View();
+        }
     }
+
+   
 }

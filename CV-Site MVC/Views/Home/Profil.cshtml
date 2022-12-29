@@ -1,8 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model User
 
 <h1>@User.Identity.Name</h1>
 
@@ -14,3 +10,5 @@
 		</Authorized>
 	</AuthorizeView>
 </form>
+
+<a asp-controller="" asp-action="Edit">Ändra din profil</a>
