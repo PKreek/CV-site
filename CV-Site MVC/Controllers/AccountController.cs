@@ -64,7 +64,7 @@ namespace CV_Site_MVC.Controllers
             return View(loginView);
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> LogOut()
         {
             await logInManager.SignOutAsync();
