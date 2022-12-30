@@ -32,7 +32,14 @@ namespace CV_Site_MVC.Controllers
             cv.UserID = currentUserId();
             _dbContext.cVs.Add(cv);
             _dbContext.SaveChanges();
-            return RedirectToAction("CV", "CV");
+            return RedirectToAction("CV");
+        }
+
+        public IActionResult Edit(int id)
+        {
+            CV cv = _dbContext.cVs.Find(id);
+
+            return View(cv);
         }
 
         private string currentUserId()

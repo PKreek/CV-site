@@ -6,8 +6,5 @@
 <h2>Utbildning: @Model.Cv.Utbildning</h2>
 <h2>ID: @Model.UserID</h2>
 
-<form asp-controller="CV" asp-action="NewCV" method="post">
-	Utbildning:<br />
-	<input asp-for="Cv.Utbildning" type="text"/>
-	<input type="submit" value="Submit" class="submit" />
-</form>
+<a asp-controller="CV" asp-action="Edit">Ändra uppgifter</a>
+
