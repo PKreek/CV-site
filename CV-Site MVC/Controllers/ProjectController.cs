@@ -32,7 +32,6 @@ namespace CV_Site_MVC.Controllers
 
         public IActionResult ListOfProjects()
         {
-            ProjectViewModel model = new ProjectViewModel();
             List<Project> projectList = _dbContext.Projects.ToList();
             return View(projectList);
         }
