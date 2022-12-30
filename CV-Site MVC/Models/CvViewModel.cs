@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace CV_Site_MVC.Models
 {
@@ -7,5 +8,7 @@ namespace CV_Site_MVC.Models
         public CV Cv { get; set; }
 
         public string UserID { get; set; }
+
+        public List <Work> Works { get; set; }
     }
 }
