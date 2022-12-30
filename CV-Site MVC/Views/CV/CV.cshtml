@@ -10,6 +10,24 @@
 
 <h2>sambandshoran: @Model.Cv.Work_CV</h2>
 
+<div>
+	<table class="table-bordered">
+		<thead>
+			<tr>
+				<td>Id</td>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var work in Model.Cv.Work_CV)
+			{
+				<tr>
+					<td>@work.WorkID</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>
+
 <h2>Arbetserfarenhet</h2>
 
 <div>
