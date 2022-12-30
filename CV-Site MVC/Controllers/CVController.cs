@@ -29,7 +29,7 @@ namespace CV_Site_MVC.Controllers
                 model.Cv = cv;
                 model.Works = _dbContext.Works.ToList<Work>();
 
-                model.Works = _dbContext.Works.Where(w => w.Work_CV.Equals(model.Cv.Work_CV)).ToList<Work>();
+                //model.Works = _dbContext.Works.Where(w => w.Work_CV.Equals(model.Cv.Work_CV)).ToList<Work>();
             }
             else
             {
