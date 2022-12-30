@@ -32,10 +32,18 @@ namespace CV_Site_MVC.Controllers
 
         public IActionResult ListOfProjects()
         {
-            List<Project> projectList = _dbContext.Projects.ToList();
-            return View(projectList);
+            ProjectViewModel model = new ProjectViewModel();
+            model.ProjectList = _dbContext.Projects.ToList();
+    
+            return View(model);
         }
 
+        [HttpPost]
+        public IActionResult JoinProject(User joinedUser, Project joinedProject)
+        {
+           
+            return RedirectToAction("ListOfProjects", "Project");
+        }
         private string currentUserId()
         {
             ClaimsPrincipal currentUser = this.User;

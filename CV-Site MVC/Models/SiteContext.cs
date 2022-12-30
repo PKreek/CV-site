@@ -18,8 +18,8 @@ namespace CV_Site_MVC.Models
         public DbSet<Work> Works { get; set; }
 
         public DbSet<Message> Messages { get; set; }
-     //   public DbSet<Work_CV> Work_CVs { get; set; }
-     //   public DbSet<Project_User> Project_Users { get; set; }
+        //public DbSet<Work_CV> Work_CVs { get; set; }
+        //public DbSet<Project_User> Project_Users { get; set; }
         public DbSet<CV> cVs { get; set; }
 
 
@@ -43,16 +43,16 @@ namespace CV_Site_MVC.Models
             //    }
             //    );
           
-            modelBuilder.Entity<IdentityUser>().HasData(
-                new IdentityUser
-                {
-                    Id = "1",
-                    UserName = "Patte1337"
+            //modelBuilder.Entity<IdentityUser>().HasData(
+            //    new IdentityUser
+            //    {
+            //        Id = "1",
+            //        UserName = "Patte1337"
                     
-                //    Description = "Rymdvarelser och så",
-                //    StartDate = new System.DateTime(2022 / 12 / 16)
-                }
-                );
+            //    //    Description = "Rymdvarelser och så",
+            //    //    StartDate = new System.DateTime(2022 / 12 / 16)
+            //    }
+            //    );
 
             modelBuilder.Entity<CV>().HasData(
                 new CV
