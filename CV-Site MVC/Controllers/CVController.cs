@@ -54,6 +54,7 @@ namespace CV_Site_MVC.Controllers
         [HttpPost]
         public IActionResult Edit(CV cv)
         {
+            cv.UserID = currentUserId();
             _dbContext.cVs.Update(cv);
             _dbContext.SaveChanges();
 
