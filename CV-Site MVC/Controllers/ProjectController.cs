@@ -34,6 +34,7 @@ namespace CV_Site_MVC.Controllers
         {
             ProjectViewModel model = new ProjectViewModel();
 
+             = _dbContext.Projects.Select(x => x.Id);
             
             List<Project> projectList = _dbContext.Projects.ToList();
             return View(projectList);
