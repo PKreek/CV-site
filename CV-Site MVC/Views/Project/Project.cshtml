@@ -1,1 +1,36 @@
-﻿
+﻿@model Project
+
+<h2>Kom igång med ett projekt</h2>
+<form asp-controller="Project" asp-action="Project" method="post">
+<table>
+    <tr>
+        <td>
+            <label>Projektets namn:</label>
+            <input asp-for="ProjectName" type="text"/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Beskrivning av projektet:</label>
+            <input asp-for="Description"type="text" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Startdatum:</label>
+            <input asp-for="StartDate"type="datetime-local" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Slutdatum:</label>
+            <input asp-for="EndDate" type="datetime-local" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="submit" value="Lägg till" class="submitbutton"/>
+        </td>
+    </tr>
+</table>
+</form>
