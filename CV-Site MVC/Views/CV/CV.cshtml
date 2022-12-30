@@ -6,5 +6,5 @@
 <h2>Utbildning: @Model.Cv.Utbildning</h2>
 <h2>ID: @Model.UserID</h2>
 
-<a asp-controller="CV" asp-action="Edit">Ändra uppgifter</a>
+<a asp-controller="CV" asp-action="Edit" asp-route-id="@Model.Cv.ID">Ändra uppgifter</a>
 
