@@ -30,13 +30,13 @@
 					<td>@project.EndDate</td>
 					<td>@project.User.UserName</td>
 					<td></td>
+					@if (signInManager.IsSignedIn(User))
+					{
 					<td>
-						@if (signInManager.IsSignedIn(User))
-						{
-                       <input type="submit" value="Gå med" class="submitbutton"/>
-						}
-                    </td>
-					
+					   <input type="submit" value="Gå med" class="submitbutton"/>
+					</td>
+					}
+
 				</tr>
 			}
 		</tbody>
