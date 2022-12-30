@@ -35,7 +35,7 @@
 						@users.User.UserName
 					}
 					</td>
-					@if (signInManager.IsSignedIn(User))
+					@if (User.Identity.IsAuthenticated)
 					{
 					<td>
 					<form asp-controller="Project" asp-action="JoinProject" method="post">
