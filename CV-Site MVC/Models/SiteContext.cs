@@ -33,15 +33,15 @@ namespace CV_Site_MVC.Models
             
 
 
-            modelBuilder.Entity<Project>().HasData(
-                new Project
-                {
-                    Id = 1,
-                    ProjectName = "MIB",
-                    Description = "Rymdvarelser och så",
-                    StartDate = new System.DateTime(2022 / 12 / 16)
-                }
-                );
+            //modelBuilder.Entity<Project>().HasData(
+            //    new Project
+            //    {
+            //        Id = 1,
+            //        ProjectName = "MIB",
+            //        Description = "Rymdvarelser och så",
+            //        StartDate = new System.DateTime(2022 / 12 / 16)
+            //    }
+            //    );
           
             modelBuilder.Entity<IdentityUser>().HasData(
                 new IdentityUser
