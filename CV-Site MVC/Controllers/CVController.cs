@@ -95,6 +95,28 @@ namespace CV_Site_MVC.Controllers
             return RedirectToAction("Work");
         }
 
+        [HttpGet]
+        public IActionResult AddWork()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddWork(Work work)
+        {
+            _dbContext.Works.Add(work);
+
+            Work_CV work_cv = new Work_CV();
+            work_cv.WorkID = work.Id;
+            work_cv.CVID = _dbContext.cVs.Where(c => c.UserID.Equals(currentUserId()))
+                .Select(i => i.ID).First();
+            _dbContext.Work_CVs.Add(work_cv);
+
+            _dbContext.SaveChanges();
+
+            return RedirectToAction("Work");
+        }
+
         private string currentUserId()
         {
             ClaimsPrincipal currentUser = this.User;
