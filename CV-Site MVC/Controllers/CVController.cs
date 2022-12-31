@@ -105,6 +105,7 @@ namespace CV_Site_MVC.Controllers
         public IActionResult AddWork(Work work)
         {
             _dbContext.Works.Add(work);
+            _dbContext.SaveChanges();
 
             Work_CV work_cv = new Work_CV();
             work_cv.WorkID = work.Id;

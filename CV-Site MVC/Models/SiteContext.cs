@@ -29,8 +29,20 @@ namespace CV_Site_MVC.Models
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Project_User>().HasKey(pu => new { pu.UserID, pu.ProjektID });
+
             modelBuilder.Entity<Work_CV>().HasKey(wc => new { wc.WorkID, wc.CVID });
             
+            modelBuilder.Entity<Work_CV>()
+                .HasOne(w => w.Work)
+                .WithMany(wc => wc.Work_CV)
+                .HasForeignKey(wi => wi.WorkID);
+
+            modelBuilder.Entity<Work_CV>()
+                .HasOne(c => c.Cv)
+                .WithMany(wc => wc.Work_CV)
+                .HasForeignKey(ci => ci.CVID);
+
+
 
 
             //modelBuilder.Entity<Project>().HasData(
@@ -42,13 +54,13 @@ namespace CV_Site_MVC.Models
             //        StartDate = new System.DateTime(2022 / 12 / 16)
             //    }
             //    );
-          
+
             //modelBuilder.Entity<IdentityUser>().HasData(
             //    new IdentityUser
             //    {
             //        Id = "1",
             //        UserName = "Patte1337"
-                    
+
             //    //    Description = "Rymdvarelser och så",
             //    //    StartDate = new System.DateTime(2022 / 12 / 16)
             //    }

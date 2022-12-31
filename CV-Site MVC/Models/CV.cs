@@ -19,7 +19,7 @@ namespace CV_Site_MVC.Models
 
         //[ForeignKey(nameof(IdentityID))]
         //public virtual User Owner { get; set; }
-        public virtual IEnumerable<Work_CV> Work_CV { get; set; } = new List<Work_CV>();
+        public virtual ICollection<Work_CV> Work_CV { get; set; } = new List<Work_CV>();
 
         public CV (string userId)
         {
