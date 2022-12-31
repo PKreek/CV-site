@@ -26,6 +26,11 @@
 								<input type="submit" value="Ändra" class="submitbutton"/>
 							</form>
 						</td>
+						<td>
+							<form asp-controller="CV" asp-action="DeleteWork" asp-route-id="@work.Id" method="post">
+								<input type="submit" value="Ta bort" class="submitbutton"/>
+							</form>
+						</td>
 					</tr>
 			}
 		</tbody>

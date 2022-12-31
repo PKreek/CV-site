@@ -118,6 +118,16 @@ namespace CV_Site_MVC.Controllers
             return RedirectToAction("Work");
         }
 
+        [HttpPost]
+        public IActionResult DeleteWork(Work work)
+        {
+            _dbContext.Work_CVs.Remove(_dbContext.Work_CVs.Where(c => c.WorkID.Equals(work.Id)).First());
+            _dbContext.Works.Remove(work);
+            _dbContext.SaveChanges();
+
+            return RedirectToAction("Work");
+        }
+
         private string currentUserId()
         {
             ClaimsPrincipal currentUser = this.User;
