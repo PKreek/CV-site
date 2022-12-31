@@ -8,5 +8,7 @@ namespace CV_Site_MVC.Models
 
         public Project Project { get; set; }
 
+        public List<Project_User> UserInProjects { get; set; }
+
     }
 }
