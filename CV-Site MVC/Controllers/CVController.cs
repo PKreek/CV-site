@@ -68,6 +68,23 @@ namespace CV_Site_MVC.Controllers
             return RedirectToAction("CV");
         }
 
+        [HttpGet]
+        public IActionResult Work(int id)
+        {
+            List<Work> works = _dbContext.Works.Where(w => _dbContext.Work_CVs
+                    .Where(c => c.CVID.Equals(id))
+                    .Select(i => i.WorkID).Contains(w.Id)).ToList();
+
+            return View(works);
+        }
+
+        [HttpGet]
+        public IActionResult EditWork(int id)
+        {
+            Work work = _dbContext.Works.FirstOrDefault(w => w.Id.Equals(id));
+
+            return View(work);
+        }
         private string currentUserId()
         {
             ClaimsPrincipal currentUser = this.User;

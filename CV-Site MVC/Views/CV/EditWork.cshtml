@@ -1,0 +1,9 @@
+﻿@model Work
+
+<h1>@Model.Name</h1>
+
+<form asp-controller="CV" asp-action="Edit" method="post">
+	Företag:<br />
+	<input asp-for="Name" type="text"/>
+	<input type="submit" value="Spara ändringar" class="submit" />
+</form>
