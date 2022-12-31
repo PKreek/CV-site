@@ -39,7 +39,7 @@ namespace CV_Site_MVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult JoinProject(User joinedUser, Project joinedProject)
+        public IActionResult JoinProject()
         {
            
             return RedirectToAction("ListOfProjects", "Project");
