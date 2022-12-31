@@ -237,3 +237,5 @@ CV-Site MVC/Migrations/20221228141450_testet.cs
 CV-Site MVC/Migrations/20221229135101_mig1.cs
 CV-Site MVC/Migrations/20221229135101_mig1.Designer.cs
 CV-Site MVC/Migrations/SiteContextModelSnapshot.cs
+CV-Site MVC/Migrations/20221231054010_mig2.Designer.cs
+CV-Site MVC/Migrations/20221231054010_mig2.cs

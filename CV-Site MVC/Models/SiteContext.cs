@@ -18,7 +18,7 @@ namespace CV_Site_MVC.Models
         public DbSet<Work> Works { get; set; }
 
         public DbSet<Message> Messages { get; set; }
-        //public DbSet<Work_CV> Work_CVs { get; set; }
+        public DbSet<Work_CV> Work_CVs { get; set; }
         public DbSet<Project_User> Project_Users { get; set; }
         public DbSet<CV> cVs { get; set; }
 
@@ -54,13 +54,13 @@ namespace CV_Site_MVC.Models
             //    }
             //    );
 
-            modelBuilder.Entity<CV>().HasData(
-                new CV
-               {
-                   ID = 2,
-                   Utbildning = "Ekonomi"
-               }
-               );
+            //modelBuilder.Entity<CV>().HasData(
+            //    new CV
+            //   {
+            //       ID = 2,
+            //       Utbildning = "Ekonomi"
+            //   }
+            //   );
         }
     }
 }
