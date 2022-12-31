@@ -27,9 +27,9 @@ namespace CV_Site_MVC.Controllers
             if (cv != null)
             { 
                 model.Cv = cv;
-                model.Works = _dbContext.Works.ToList<Work>();
-
-                //model.Works = _dbContext.Works.Where(w => w.Work_CV.Equals(model.Cv.Work_CV)).ToList<Work>();
+                model.Works = _dbContext.Works.Where(w => _dbContext.Work_CVs
+                    .Where(c => c.CVID.Equals(cv.ID))
+                    .Select(i => i.WorkID).Contains(w.Id)).ToList();
             }
             else
             {
@@ -65,7 +65,7 @@ namespace CV_Site_MVC.Controllers
             _dbContext.cVs.Update(cv);
             _dbContext.SaveChanges();
 
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("CV");
         }
 
         private string currentUserId()
