@@ -85,6 +85,16 @@ namespace CV_Site_MVC.Controllers
 
             return View(work);
         }
+
+        [HttpPost]
+        public IActionResult EditWork(Work work)
+        {
+            _dbContext.Works.Update(work);
+            _dbContext.SaveChanges();
+
+            return RedirectToAction("Work");
+        }
+
         private string currentUserId()
         {
             ClaimsPrincipal currentUser = this.User;
