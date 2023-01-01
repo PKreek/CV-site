@@ -3,6 +3,13 @@
 
 <h1>CV finns här typ. #fuckuni </h1>
 
+@{
+	var photoPath = "~/" + Model.Cv.PhotoPath;
+}
+<div>
+	<img src="@photoPath" asp-append-version="true"/>
+</div>
+<h2>Photopath: @Model.Cv.PhotoPath</h2>
 <a asp-controller="CV" asp-action="Image" asp-route-id="@Model.Cv.ID">Ladda upp foto</a>
 
 <h2>Utbildning: @Model.Cv.Utbildning</h2>

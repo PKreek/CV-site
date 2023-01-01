@@ -205,13 +205,13 @@ namespace CV_Site_MVC.Controllers
         public IActionResult Image(CvViewModel model)
         {
             string uploadsFolder = Path.Combine(hostingEnvironment.WebRootPath);
-            //string uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
-            //string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-            string filePath = Path.Combine(uploadsFolder, model.Photo.FileName);
+            string uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
+            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+            //string filePath = Path.Combine(uploadsFolder, model.Photo.FileName);
             model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
 
             CV cv = _dbContext.cVs.Where(c => c.UserID.Equals(currentUserId())).First();
-            cv.PhotoPath = filePath;
+            cv.PhotoPath = uniqueFileName;
             _dbContext.cVs.Update(cv);
             _dbContext.SaveChanges();
 
