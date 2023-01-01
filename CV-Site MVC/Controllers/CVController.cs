@@ -30,6 +30,7 @@ namespace CV_Site_MVC.Controllers
                 model.Works = _dbContext.Works.Where(w => _dbContext.Work_CVs
                     .Where(c => c.CVID.Equals(cv.ID))
                     .Select(i => i.WorkID).Contains(w.Id)).ToList();
+                model.Skills = _dbContext.Skills.Where(s => s.CVId.Equals(cv.ID)).ToList<Skill>();
             }
             else
             {
@@ -134,6 +135,67 @@ namespace CV_Site_MVC.Controllers
             _dbContext.SaveChanges();
 
             return RedirectToAction("Work");
+        }
+
+        [HttpGet]
+        public IActionResult Skill(int id)
+        {
+            List<Skill> skills = _dbContext.Skills.Where(w => w.CVId.Equals(id)).ToList<Skill>();
+
+            return View(skills);
+        }
+
+        [HttpGet]
+        public IActionResult EditSkill(int id)
+        {
+            Skill skill = _dbContext.Skills.FirstOrDefault(w => w.Id.Equals(id));
+
+            return View(skill);
+        }
+
+        [HttpPost]
+        public IActionResult EditSkill(Skill skill)
+        {
+            skill.CVId = _dbContext.cVs.Where(c => c.UserID.Equals(currentUserId()))
+                    .Select(i => i.ID).First();
+            _dbContext.Skills.Update(skill);
+            _dbContext.SaveChanges();
+
+            return RedirectToAction("Skill");
+        }
+
+        [HttpGet]
+        public IActionResult AddSkill()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddSkill(Skill skill)
+        {
+            if (ModelState.IsValid)
+            {
+                skill.CVId = _dbContext.cVs.Where(c => c.UserID.Equals(currentUserId()))
+                    .Select(i => i.ID).First();
+                _dbContext.Skills.Add(skill);
+                _dbContext.SaveChanges();
+
+                return RedirectToAction("Skill");
+            }
+            else
+            {
+                return View(skill);
+            }
+
+        }
+
+        [HttpPost]
+        public IActionResult DeleteSkill(Skill skill)
+        {
+            _dbContext.Skills.Remove(skill);
+            _dbContext.SaveChanges();
+
+            return RedirectToAction("Skill");
         }
 
         private string currentUserId()

@@ -1,0 +1,9 @@
+﻿@model Skill
+
+<h1>@Model.Name</h1>
+
+<form asp-controller="CV" asp-action="EditSkill" method="post">
+	<label>Kompetens </label>
+	<input asp-for="Name" type="text"/><br />
+	<input type="submit" value="Spara ändringar" class="submit" />
+</form>

@@ -10,5 +10,7 @@ namespace CV_Site_MVC.Models
         public string UserID { get; set; }
 
         public List <Work> Works { get; set; }
+
+        public List<Skill> Skills { get; set; }
     }
 }
