@@ -104,18 +104,26 @@ namespace CV_Site_MVC.Controllers
         [HttpPost]
         public IActionResult AddWork(Work work)
         {
-            _dbContext.Works.Add(work);
-            _dbContext.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                _dbContext.Works.Add(work);
+                _dbContext.SaveChanges();
 
-            Work_CV work_cv = new Work_CV();
-            work_cv.WorkID = work.Id;
-            work_cv.CVID = _dbContext.cVs.Where(c => c.UserID.Equals(currentUserId()))
-                .Select(i => i.ID).First();
-            _dbContext.Work_CVs.Add(work_cv);
+                Work_CV work_cv = new Work_CV();
+                work_cv.WorkID = work.Id;
+                work_cv.CVID = _dbContext.cVs.Where(c => c.UserID.Equals(currentUserId()))
+                    .Select(i => i.ID).First();
+                _dbContext.Work_CVs.Add(work_cv);
 
-            _dbContext.SaveChanges();
+                _dbContext.SaveChanges();
 
-            return RedirectToAction("Work");
+                return RedirectToAction("Work");
+            }
+            else
+            {
+                return View(work);
+            }
+            
         }
 
         [HttpPost]

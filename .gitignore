@@ -243,3 +243,5 @@ CV-Site MVC/Migrations/20221231094441_mig3.cs
 CV-Site MVC/Migrations/20221231094441_mig3.Designer.cs
 CV-Site MVC/Migrations/20221231101738_nyworkcv.cs
 CV-Site MVC/Migrations/20221231101738_nyworkcv.Designer.cs
+CV-Site MVC/Migrations/20230101061109_nullable.cs
+CV-Site MVC/Migrations/20230101061109_nullable.Designer.cs
