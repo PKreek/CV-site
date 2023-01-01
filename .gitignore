@@ -249,3 +249,6 @@ CV-Site MVC/Migrations/20230101063854_skill.cs
 CV-Site MVC/Migrations/20230101063854_skill.Designer.cs
 CV-Site MVC/Migrations/20230101071021_skills2.cs
 CV-Site MVC/Migrations/20230101071021_skills2.Designer.cs
+CV-Site MVC/Migrations/20230101102846_photo.cs
+CV-Site MVC/Migrations/20230101102846_photo.Designer.cs
+*.png

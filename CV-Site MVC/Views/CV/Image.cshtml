@@ -1,0 +1,9 @@
+﻿@model CvViewModel
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form enctype="multipart/form-data" asp-controller="CV" asp-action="Image" method="post">
+	<label>Bild </label>
+	<input asp-for="Photo"/><br />
+	<input type="submit" value="Lägg till" class="submit" />
+</form>

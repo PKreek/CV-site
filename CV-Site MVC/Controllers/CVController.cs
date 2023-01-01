@@ -1,6 +1,10 @@
 ﻿using CV_Site_MVC.Models;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 
@@ -9,10 +13,12 @@ namespace CV_Site_MVC.Controllers
     public class CVController : Controller
     {
         private SiteContext _dbContext;
+        private IHostingEnvironment hostingEnvironment;
 
-        public CVController(SiteContext dbContext)
+        public CVController(SiteContext dbContext, IHostingEnvironment hostingEnvironment)
         {
             _dbContext = dbContext;
+            this.hostingEnvironment = hostingEnvironment;
         }
 
         [HttpGet]
@@ -186,7 +192,30 @@ namespace CV_Site_MVC.Controllers
             {
                 return View(skill);
             }
+        }
 
+
+        [HttpGet]
+        public IActionResult Image(int id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Image(CvViewModel model)
+        {
+            string uploadsFolder = Path.Combine(hostingEnvironment.WebRootPath);
+            //string uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
+            //string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+            string filePath = Path.Combine(uploadsFolder, model.Photo.FileName);
+            model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
+
+            CV cv = _dbContext.cVs.Where(c => c.UserID.Equals(currentUserId())).First();
+            cv.PhotoPath = filePath;
+            _dbContext.cVs.Update(cv);
+            _dbContext.SaveChanges();
+
+            return View();
         }
 
         [HttpPost]

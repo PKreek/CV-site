@@ -17,6 +17,8 @@ namespace CV_Site_MVC.Models
         [ForeignKey(nameof(UserID))]
         public virtual User User { get; set; }
 
+        public string? PhotoPath { get; set; }
+
         public virtual ICollection<Work_CV> Work_CV { get; set; } = new List<Work_CV>();
 
         public CV (string userId)
