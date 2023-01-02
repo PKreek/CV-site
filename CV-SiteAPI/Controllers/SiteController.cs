@@ -21,9 +21,9 @@ namespace CV_SiteAPI.Controllers
         }
 
         [HttpGet]
-        public List<Message> Get()
+        public List<CV> Get()
         {
-            return _siteContext.Messages.ToList();
+            return _siteContext.cVs.ToList();
         }
 
         //// GET: api/values
