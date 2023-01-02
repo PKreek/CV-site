@@ -294,7 +294,24 @@ namespace CV_Site_MVC.Controllers
             return View();
         }
 
-        
+        public IActionResult Privat()
+        {
+            CV cv = _dbContext.cVs.Where(c => c.UserID.Equals(currentUserId())).First();
+
+            if (cv.PrivateCV)
+            {
+                cv.PrivateCV = false;
+            } 
+            else
+            {
+                cv.PrivateCV = true;
+            }
+
+            _dbContext.cVs.Update(cv);
+            _dbContext.SaveChanges();
+
+            return RedirectToAction("CV");
+        }
 
         private string currentUserId()
         {

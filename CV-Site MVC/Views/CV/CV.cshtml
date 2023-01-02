@@ -1,7 +1,15 @@
 ﻿@using CV_Site_MVC.Models
 @model CvViewModel
 
-<h1>CV finns här typ. #fuckuni </h1>
+<h1>CV</h1>
+
+@if(Model.Cv.PrivateCV) {
+	<Label>Ditt CV är privat</Label>
+	<a asp-controller="CV" asp-action="Privat">Byt till publikt</a>
+}else{
+	<label>Ditt CV är publikt</label>
+	<a asp-controller="CV" asp-action="Privat">Byt till privat</a>
+}
 
 @{
 	var photoPath = "~/" + Model.Cv.PhotoPath;
@@ -9,7 +17,6 @@
 <div>
 	<img src="@photoPath" asp-append-version="true"/>
 </div>
-<h2>Photopath: @Model.Cv.PhotoPath</h2>
 <a asp-controller="CV" asp-action="Image" asp-route-id="@Model.Cv.ID">Ladda upp foto</a>
 
 <h2>Personuppgifter</h2>
