@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 
-namespace CV_Site_MVC.Models
+namespace CV_SiteAPI.Models
 {
     public class CV
     {

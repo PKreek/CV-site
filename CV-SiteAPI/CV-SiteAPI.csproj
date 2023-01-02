@@ -13,6 +13,7 @@
     <None Remove="Microsoft.EntityFrameworkCore.Tools" />
     <None Remove="Controllers\" />
     <None Remove="Models\" />
+    <None Remove="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.17" />
@@ -25,6 +26,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.17" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CV_Site_MVC.Models
+namespace CV_SiteAPI.Models
 {
     public class Project
     {

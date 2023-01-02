@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 
-namespace CV_Site_MVC.Models
+namespace CV_SiteAPI.Models
 {
 	public class Skill
 	{

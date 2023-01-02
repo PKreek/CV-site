@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace CV_Site_MVC.Models
+namespace CV_SiteAPI.Models
 {
     public class SiteContext:IdentityDbContext<IdentityUser>
     {

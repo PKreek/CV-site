@@ -2,7 +2,7 @@
 using System.Data;
 using System.Reflection.PortableExecutable;
 
-namespace CV_Site_MVC.Models
+namespace CV_SiteAPI.Models
 {
     public class Work_CV
     {
