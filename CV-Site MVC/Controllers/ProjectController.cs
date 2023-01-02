@@ -53,6 +53,17 @@ namespace CV_Site_MVC.Controllers
             _dbContext.SaveChanges();
             return RedirectToAction("ListOfProjects", "Project");
         }
+
+        [HttpPost]
+        public IActionResult RemoveProject(int projId)
+        {
+            Project_User project_User = new Project_User();
+            project_User.ProjektID = projId;
+            project_User.UserID = currentUserId();
+            _dbContext.Project_Users.Remove(project_User);
+            _dbContext.SaveChanges();
+            return RedirectToAction("ListOfProjects", "Project");
+        }
         private string currentUserId()
         {
             ClaimsPrincipal currentUser = this.User;

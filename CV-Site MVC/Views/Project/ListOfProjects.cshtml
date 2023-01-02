@@ -45,6 +45,14 @@
 								</form>
 							</td>
 						}
+						else
+						{
+							<td>
+								<form method="post" asp-controller="Project" asp-action="RemoveProject" asp-route-projId="@project.Id">
+									<button type="submit">Gå ur</button>
+								</form>
+							</td>
+						}
 					}
 
 				</tr>
