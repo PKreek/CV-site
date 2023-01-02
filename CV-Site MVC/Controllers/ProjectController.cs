@@ -64,6 +64,19 @@ namespace CV_Site_MVC.Controllers
             _dbContext.SaveChanges();
             return RedirectToAction("ListOfProjects", "Project");
         }
+
+        [HttpGet]
+        public IActionResult UpdateProject()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult UpdateProject(int projId)
+        {
+
+            return RedirectToAction("Profil", "Home");
+        }
         private string currentUserId()
         {
             ClaimsPrincipal currentUser = this.User;

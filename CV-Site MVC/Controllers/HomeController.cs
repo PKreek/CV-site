@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace CV_Site_MVC.Controllers
@@ -44,8 +45,19 @@ namespace CV_Site_MVC.Controllers
 
         [Authorize]
         public IActionResult Profil()
+        {      
+                var user = currentUserId();
+                ProfileViewModel model = new ProfileViewModel();
+                model.UserInProjects = _dbContext.Project_Users.ToList();
+                model.ProjectList = _dbContext.Projects.Where(x => x.UserId.Equals(user)).ToList();
+
+                return View(model);  
+        }
+
+        private string currentUserId()
         {
-            return View();
+            ClaimsPrincipal currentUser = this.User;
+            return currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
         }
 
         //public IActionResult Privacy()
