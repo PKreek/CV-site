@@ -1,0 +1,31 @@
+﻿@model List<Education>
+
+<h1>Arbeten</h1>
+<div>
+	<table class="table-bordered">
+		<thead>
+			<tr>
+				<td>Utbildning</td>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var education in Model)
+			{
+				<tr>
+					<td>@education.Name</td>
+					<td>
+						<form asp-controller="CV" asp-action="EditEducation" asp-route-id="@education.Id" method="get">
+							<input type="submit" value="Ändra" class="submitbutton"/>
+						</form>
+					</td>
+					<td>
+						<form asp-controller="CV" asp-action="DeleteEducation" asp-route-id="@education.Id" method="post">
+							<input type="submit" value="Ta bort" class="submitbutton"/>
+						</form>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>
+<a asp-controller="CV" asp-action="AddEducation">Lägg till</a>

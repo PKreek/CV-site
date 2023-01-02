@@ -22,7 +22,8 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
-                        @if (signInManager.IsSignedIn(User))
+                        @*@if (signInManager.IsSignedIn(User))*@
+                        @if (User.Identity.IsAuthenticated)
                         {
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LogOut">Logga ut</a>
@@ -30,6 +31,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Profil">Profil</a>
                         </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="CV" asp-action="CV">CV(för test)</a>
+                            </li>
                         }
                         else
                         {
@@ -37,9 +41,6 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LogIn">Logga in</a>
                         </li>
                         }  
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="CV" asp-action="CV">CV(för test)</a>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Project" asp-action="ListOfProjects">Projekt</a>
                         </li>

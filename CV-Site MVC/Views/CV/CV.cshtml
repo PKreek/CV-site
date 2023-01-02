@@ -1,14 +1,89 @@
 ﻿@using CV_Site_MVC.Models
 @model CvViewModel
 
-<h1>CV finns här typ. #fuckuni </h1>
+<h1>CV</h1>
 
-<h2>Utbildning: @Model.Cv.Utbildning</h2>
-<h2>ID: @Model.UserID</h2>
+@if(Model.Cv.PrivateCV) {
+	<Label>Ditt CV är privat</Label>
+	<a asp-controller="CV" asp-action="Privat">Byt till publikt</a>
+}else{
+	<label>Ditt CV är publikt</label>
+	<a asp-controller="CV" asp-action="Privat">Byt till privat</a>
+}
 
+@{
+	var photoPath = "~/" + Model.Cv.PhotoPath;
+}
+<div>
+	<img src="@photoPath" asp-append-version="true"/>
+</div>
+<a asp-controller="CV" asp-action="Image" asp-route-id="@Model.Cv.ID">Ladda upp foto</a>
+
+<h2>Personuppgifter</h2>
+
+<div>
+	<table class="table-bordered">
+		<thead>
+			<tr>
+				<td>Förnamn</td>
+				<td>Efternamn</td>
+				<td>Email</td>
+				<td>Telefonnummer</td>
+			</tr>
+		</thead>
+		<tbody>
+				<tr>					
+					<td>@Model.Cv.FirstName</td>
+					<td>@Model.Cv.LastName</td>
+					<td>@Model.Cv.Email</td>
+					<td>@Model.Cv.Phone</td>
+				</tr>
+		</tbody>
+	</table>
+</div>
 <a asp-controller="CV" asp-action="Edit" asp-route-id="@Model.Cv.ID">Ändra uppgifter</a>
 
-<h2>sambandshoran: @Model.Cv.Work_CV</h2>
+<h2>Kompetenser</h2>
+
+<div>
+	<table class="table-bordered">
+		<thead>
+			<tr>
+				<td>Kompetens</td>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var skill in Model.Skills)
+			{
+				<tr>
+					<td>@skill.Name</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>
+<a asp-controller="CV" asp-action="Skill" asp-route-id="@Model.Cv.ID">Ändra uppgifter</a>
+
+<h2>Utbildningar</h2>
+
+<div>
+	<table class="table-bordered">
+		<thead>
+			<tr>
+				<td>Utbildning</td>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var education in Model.Educations)
+			{
+				<tr>
+					<td>@education.Name</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>
+<a asp-controller="CV" asp-action="Education" asp-route-id="@Model.Cv.ID">Ändra uppgifter</a>
 
 <h2>Arbetserfarenhet</h2>
 
@@ -16,7 +91,6 @@
 	<table class="table-bordered">
 		<thead>
 			<tr>
-				<td>Id</td>
 				<td>Företag</td>
 				<td>Roll</td>
 				<td>Startdatum</td>
@@ -27,7 +101,6 @@
 			@foreach (var work in Model.Works)
 			{
 				<tr>
-					<td>@work.Id</td>
 					<td>@work.Name</td>
 					<td>@work.Role</td>
 					<td>@work.StartDate</td>
@@ -37,3 +110,4 @@
 		</tbody>
 	</table>
 </div>
+<a asp-controller="CV" asp-action="Work" asp-route-id="@Model.Cv.ID">Ändra uppgifter</a>

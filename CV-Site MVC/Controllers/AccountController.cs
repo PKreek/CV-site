@@ -4,10 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace CV_Site_MVC.Controllers
 {
+    
     public class AccountController : Controller
     {
         private UserManager<User> userManager;
@@ -78,13 +80,55 @@ namespace CV_Site_MVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit( int id )
+        public IActionResult Edit()
         {
-            //User user = (User)_dbContext.Users.Find(id);
-            //User user = (User)_dbContext.Users.FirstOrDefault(u => u.Id.Equals(id));
+            UserEditViewModel model = new UserEditViewModel();
 
-            return View();
+            model.UserId = currentUserId();
+            model.UserName = currentUserName();
+
+            //User user = (User)_dbContext.Users.Where(c => c.Id.Equals(currentUserId()));
+
+            //if (user != null)
+            //{
+            //    model.user = user;
+            //    //model.Works = _dbContext.Works.Where(w => _dbContext.Work_CVs
+            //    //    .Where(c => c.CVID.Equals(cv.ID))
+            //    //    .Select(i => i.WorkID).Contains(w.Id)).ToList();
+            //}
+            //else
+            //{
+            //    //model.user = new User(currentUserId());
+            //    //_dbContext.Users.Add(model.user);
+            //    //_dbContext.SaveChanges();
+            //}
+
+            return View(model);
         }
+
+        private string currentUserId()
+        {
+            ClaimsPrincipal currentUser = this.User;
+            return currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+        }
+        private string currentUserName()
+        {
+            ClaimsPrincipal currentUser = this.User;
+            return currentUser.FindFirst(ClaimTypes.Name).Value;
+        }
+
+        //[HttpGet]
+        //public IActionResult Edit( int id )
+        //{
+        //    //var claim = (ClaimsIdentity)User.Identity;
+        //    //User user = (User)_dbContext.Users.Find(id);
+        //    //User user = (User)_dbContext.Users.FirstOrDefault(u => u.Id.Equals(id));
+
+        //    return View();
+        //}
+
+
+
     }
 
    

@@ -1,0 +1,15 @@
+﻿@model Work
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-controller="CV" asp-action="AddWork" method="post">
+	<label>Företag </label>
+	<input asp-for="Name" type="text"/><br />
+	<label>Roll </label>
+	<input asp-for="Role" type="text"/><br />
+	<label>Anställningsdatum </label>
+	<input asp-for="StartDate"type="datetime-local" /><br />
+	<label>Slutdatum </label>
+	<input asp-for="EndDate"type="datetime-local" /><br />
+	<input type="submit" value="Lägg till" class="submit" />
+</form>

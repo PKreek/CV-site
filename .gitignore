@@ -237,3 +237,27 @@ CV-Site MVC/Migrations/20221228141450_testet.cs
 CV-Site MVC/Migrations/20221229135101_mig1.cs
 CV-Site MVC/Migrations/20221229135101_mig1.Designer.cs
 CV-Site MVC/Migrations/SiteContextModelSnapshot.cs
+CV-Site MVC/Migrations/20221231054010_mig2.Designer.cs
+CV-Site MVC/Migrations/20221231054010_mig2.cs
+CV-Site MVC/Migrations/20221231094441_mig3.cs
+CV-Site MVC/Migrations/20221231094441_mig3.Designer.cs
+CV-Site MVC/Migrations/20221231101738_nyworkcv.cs
+CV-Site MVC/Migrations/20221231101738_nyworkcv.Designer.cs
+CV-Site MVC/Migrations/20230101061109_nullable.cs
+CV-Site MVC/Migrations/20230101061109_nullable.Designer.cs
+CV-Site MVC/Migrations/20230101063854_skill.cs
+CV-Site MVC/Migrations/20230101063854_skill.Designer.cs
+CV-Site MVC/Migrations/20230101071021_skills2.cs
+CV-Site MVC/Migrations/20230101071021_skills2.Designer.cs
+CV-Site MVC/Migrations/20230101102846_photo.cs
+CV-Site MVC/Migrations/20230101102846_photo.Designer.cs
+*.png
+CV-Site MVC/wwwroot/c9e7a773-3f09-4218-a922-45298c38aad0_315976476_542484773935556_3823170195893196368_n.jpg
+CV-Site MVC/Migrations/20230102114419_peruppgf.cs
+CV-Site MVC/Migrations/20230102114419_peruppgf.Designer.cs
+CV-Site MVC/Migrations/20230102123637_education.cs
+CV-Site MVC/Migrations/20230102123637_education.Designer.cs
+CV-Site MVC/wwwroot/4f097ae6-9bb2-48cf-9395-01faad4a745d_316154478_3065527503707851_3314297939841359584_n.jpg
+CV-Site MVC/wwwroot/66e10d38-0fa0-4e2c-9811-c67fa844a717_28o.jpg
+CV-Site MVC/Migrations/20230102134118_privat.cs
+CV-Site MVC/Migrations/20230102134118_privat.Designer.cs

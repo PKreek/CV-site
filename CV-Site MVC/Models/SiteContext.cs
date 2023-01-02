@@ -18,19 +18,31 @@ namespace CV_Site_MVC.Models
         public DbSet<Work> Works { get; set; }
 
         public DbSet<Message> Messages { get; set; }
-     //   public DbSet<Work_CV> Work_CVs { get; set; }
-     //   public DbSet<Project_User> Project_Users { get; set; }
+        public DbSet<Work_CV> Work_CVs { get; set; }
+        public DbSet<Project_User> Project_Users { get; set; }
         public DbSet<CV> cVs { get; set; }
-
-
+        public DbSet<Skill> Skills { get; set; }
+        public DbSet<Education> Educations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Project_User>().HasKey(pu => new { pu.UserID, pu.ProjektID });
+
             modelBuilder.Entity<Work_CV>().HasKey(wc => new { wc.WorkID, wc.CVID });
             
+            modelBuilder.Entity<Work_CV>()
+                .HasOne(w => w.Work)
+                .WithMany(wc => wc.Work_CV)
+                .HasForeignKey(wi => wi.WorkID);
+
+            modelBuilder.Entity<Work_CV>()
+                .HasOne(c => c.Cv)
+                .WithMany(wc => wc.Work_CV)
+                .HasForeignKey(ci => ci.CVID);
+
+
 
 
             //modelBuilder.Entity<Project>().HasData(
@@ -42,25 +54,25 @@ namespace CV_Site_MVC.Models
             //        StartDate = new System.DateTime(2022 / 12 / 16)
             //    }
             //    );
-          
-            modelBuilder.Entity<IdentityUser>().HasData(
-                new IdentityUser
-                {
-                    Id = "1",
-                    UserName = "Patte1337"
-                    
-                //    Description = "Rymdvarelser och så",
-                //    StartDate = new System.DateTime(2022 / 12 / 16)
-                }
-                );
 
-            modelBuilder.Entity<CV>().HasData(
-                new CV
-               {
-                   ID = 2,
-                   Utbildning = "Ekonomi"
-               }
-               );
+            //modelBuilder.Entity<IdentityUser>().HasData(
+            //    new IdentityUser
+            //    {
+            //        Id = "1",
+            //        UserName = "Patte1337"
+
+            //    //    Description = "Rymdvarelser och så",
+            //    //    StartDate = new System.DateTime(2022 / 12 / 16)
+            //    }
+            //    );
+
+            //modelBuilder.Entity<CV>().HasData(
+            //    new CV
+            //   {
+            //       ID = 2,
+            //       Utbildning = "Ekonomi"
+            //   }
+            //   );
         }
     }
 }
