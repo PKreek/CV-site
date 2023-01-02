@@ -22,6 +22,7 @@ namespace CV_Site_MVC.Models
         public DbSet<Project_User> Project_Users { get; set; }
         public DbSet<CV> cVs { get; set; }
         public DbSet<Skill> Skills { get; set; }
+        public DbSet<Education> Educations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -10,11 +11,13 @@ namespace CV_Site_MVC.Models
 
         public string UserID { get; set; }
 
-        public User CvUser { get; set; }
+        public IdentityUser CvUser { get; set; }
 
-        public List <Work> Works { get; set; }
+        public List<Work> Works { get; set; }
 
         public List<Skill> Skills { get; set; }
+
+        public List<Education> Educations { get; set; }
 
         public IFormFile Photo { get; set; }
     }

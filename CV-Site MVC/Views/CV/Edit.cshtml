@@ -3,7 +3,13 @@
 <h1>@Model.Utbildning</h1>
 
 <form asp-controller="CV" asp-action="Edit" method="post">
-	<label>Utbildning: </label><br />
-	<input asp-for="Utbildning" type="text"/>
+	<label>Förnamn: </label><br />
+	<input asp-for="FirstName" type="text"/>
+	<label>Efternamn: </label><br />
+	<input asp-for="LastName" type="text"/>
+	<label>Email: </label><br />
+	<input asp-for="Email" type="text"/>
+	<label>Telfonnummer: </label><br />
+	<input asp-for="Phone" type="text"/>
 	<input type="submit" value="Spara ändringar" class="submit" />
 </form>

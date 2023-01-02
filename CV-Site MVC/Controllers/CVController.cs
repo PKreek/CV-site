@@ -1,5 +1,6 @@
 ﻿using CV_Site_MVC.Models;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -42,9 +43,15 @@ namespace CV_Site_MVC.Controllers
             }
 
             model.Skills = _dbContext.Skills.Where(s => s.CVId.Equals(model.Cv.ID)).ToList<Skill>();
+            model.Educations = _dbContext.Educations.Where(s => s.CVId.Equals(model.Cv.ID)).ToList<Education>();
             model.Works = _dbContext.Works.Where(w => _dbContext.Work_CVs
                     .Where(c => c.CVID.Equals(model.Cv.ID))
                     .Select(i => i.WorkID).Contains(w.Id)).ToList();
+            model.CvUser = _dbContext.Users.Where(u => u.Id.Equals(model.UserID)).First();
+
+            ClaimsPrincipal currentUser = this.User;
+
+            //var user = _userManager.GetUserAsync(User).Result;
 
             return View(model);
         }
@@ -70,6 +77,7 @@ namespace CV_Site_MVC.Controllers
         public IActionResult Edit(CV cv)
         {
             cv.UserID = currentUserId();
+            cv.PhotoPath = _dbContext.cVs.Where(x => x.UserID.Equals(currentUserId())).Select(y => y.PhotoPath).First();
             _dbContext.cVs.Update(cv);
             _dbContext.SaveChanges();
 
@@ -195,6 +203,74 @@ namespace CV_Site_MVC.Controllers
             }
         }
 
+        [HttpPost]
+        public IActionResult DeleteSkill(Skill skill)
+        {
+            _dbContext.Skills.Remove(skill);
+            _dbContext.SaveChanges();
+
+            return RedirectToAction("Skill");
+        }
+
+        [HttpGet]
+        public IActionResult Education(int id)
+        {
+            List<Education> educations = _dbContext.Educations.Where(w => w.CVId.Equals(id)).ToList<Education>();
+
+            return View(educations);
+        }
+
+        [HttpGet]
+        public IActionResult EditEducation(int id)
+        {
+            Education educations = _dbContext.Educations.FirstOrDefault(w => w.Id.Equals(id));
+
+            return View(educations);
+        }
+
+        [HttpPost]
+        public IActionResult EditEducation(Education education)
+        {
+            education.CVId = _dbContext.cVs.Where(c => c.UserID.Equals(currentUserId()))
+                    .Select(i => i.ID).First();
+            _dbContext.Educations.Update(education);
+            _dbContext.SaveChanges();
+
+            return RedirectToAction("education");
+        }
+
+        [HttpGet]
+        public IActionResult AddEducation()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddEducation(Education education)
+        {
+            if (ModelState.IsValid)
+            {
+                education.CVId = _dbContext.cVs.Where(c => c.UserID.Equals(currentUserId()))
+                    .Select(i => i.ID).First();
+                _dbContext.Educations.Add(education);
+                _dbContext.SaveChanges();
+
+                return RedirectToAction("Education");
+            }
+            else
+            {
+                return View(education);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult DeleteEducation(Education education)
+        {
+            _dbContext.Educations.Remove(education);
+            _dbContext.SaveChanges();
+
+            return RedirectToAction("Education");
+        }
 
         [HttpGet]
         public IActionResult Image(int id)
@@ -218,14 +294,7 @@ namespace CV_Site_MVC.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult DeleteSkill(Skill skill)
-        {
-            _dbContext.Skills.Remove(skill);
-            _dbContext.SaveChanges();
-
-            return RedirectToAction("Skill");
-        }
+        
 
         private string currentUserId()
         {

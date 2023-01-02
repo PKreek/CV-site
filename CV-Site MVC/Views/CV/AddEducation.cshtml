@@ -1,0 +1,9 @@
+﻿@model Education
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-controller="CV" asp-action="AddEducation" method="post">
+	<label>Utbildning </label>
+	<input asp-for="Name" type="text"/><br />
+	<input type="submit" value="Lägg till" class="submit" />
+</form>
