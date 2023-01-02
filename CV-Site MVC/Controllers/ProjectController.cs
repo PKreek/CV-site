@@ -76,6 +76,7 @@ namespace CV_Site_MVC.Controllers
         [HttpPost]
         public IActionResult UpdateProject(Project project)
         {
+            project.UserId = currentUserId();
             _dbContext.Projects.Update(project);
             _dbContext.SaveChanges();
             return RedirectToAction("Profil", "Home");
