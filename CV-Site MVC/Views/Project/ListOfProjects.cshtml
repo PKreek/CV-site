@@ -39,8 +39,8 @@
 					@if (User.Identity.IsAuthenticated)
 					{				
 					<td>			
-					<form method="post" asp-controller="Project" asp-action="JoinProject" asp-route-id="@project.Id">
-					   <button type="submit"> Gå med </button>
+					<form method="post" asp-controller="Project" asp-action="JoinProject" asp-route-projId="@project.Id">
+					   <button type="submit">Gå med</button>
 					</form>
 					</td>
 					}
