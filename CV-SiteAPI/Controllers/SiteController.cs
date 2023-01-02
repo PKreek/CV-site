@@ -26,6 +26,13 @@ namespace CV_SiteAPI.Controllers
             return _siteContext.cVs.ToList();
         }
 
+        [HttpGet("ID")]
+        public CV Get(int ID)
+        {
+            return _siteContext.cVs.Find(ID);
+
+        }
+
         //// GET: api/values
         //[HttpGet]
         //public IEnumerable<string> Get()
@@ -33,12 +40,6 @@ namespace CV_SiteAPI.Controllers
         //    return new string[] { "value1", "value2" };
         //}
 
-        //// GET api/values/5
-        //[HttpGet("{id}")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
 
         //// POST api/values
         //[HttpPost]
