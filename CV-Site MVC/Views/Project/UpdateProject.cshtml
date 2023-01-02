@@ -2,6 +2,13 @@
 
 <form asp-controller="Project" asp-action="UpdateProject" method="post">
     <table>
+
+        <tr>
+            <td>
+                @*<label>Projektets id:</label>*@
+                <input type="hidden" asp-for="Id" />
+            </td>
+        </tr>
         <tr>
             <td>
                 <label>Projektets namn:</label>
