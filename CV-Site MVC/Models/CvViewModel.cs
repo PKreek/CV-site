@@ -20,5 +20,7 @@ namespace CV_Site_MVC.Models
         public List<Education> Educations { get; set; }
 
         public IFormFile Photo { get; set; }
+
+        public bool IsMyCv { get; set; }
     }
 }

@@ -1,10 +1,19 @@
-﻿@model ProfileViewModel
+﻿@using System.Security.Claims
+@model ProfileViewModel
 
 
 <h1>Välkommen @User.Identity.Name</h1>
 
+@{
+	ClaimsPrincipal currentUser = this.User;
+	string id = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+}
+
 <div>
 	<a asp-controller="Account" asp-action="Edit">Ändra din profil</a>
+</div>
+<div>
+	<a asp-controller="CV" asp-action="CV" asp-route-id="@id">Gå till ditt CV</a>
 </div>
 <div>
 	<a asp-controller="Project" asp-action="Project">Starta ett projekt</a>
