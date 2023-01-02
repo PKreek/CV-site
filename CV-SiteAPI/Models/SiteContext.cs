@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.IO;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace CV_SiteAPI.Models
 {
@@ -14,15 +16,28 @@ namespace CV_SiteAPI.Models
 
         public DbSet<Project> Projects { get; set; }
         public DbSet<IdentityUser> Users { get; set; }
-
         public DbSet<Work> Works { get; set; }
-
         public DbSet<Message> Messages { get; set; }
         public DbSet<Work_CV> Work_CVs { get; set; }
         public DbSet<Project_User> Project_Users { get; set; }
         public DbSet<CV> cVs { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Education> Educations { get; set; }
+
+        //Tillåter oss att ändra vart vi ska hämta data ifrån. 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                IConfigurationRoot configuration = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json")
+                    .Build();
+
+                var connectionString = configuration.GetConnectionString("SiteContextConnectionString");
+                optionsBuilder.UseLazyLoadingProxies().UseSqlServer(connectionString);
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
