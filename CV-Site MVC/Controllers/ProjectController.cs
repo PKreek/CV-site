@@ -66,15 +66,18 @@ namespace CV_Site_MVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult UpdateProject()
+        public IActionResult UpdateProject(int projId)
         {
-            return View();
+            Project project = _dbContext.Projects.Find(projId);
+
+            return View(project);
         }
 
         [HttpPost]
-        public IActionResult UpdateProject(int projId)
+        public IActionResult UpdateProject(Project project)
         {
-
+            _dbContext.Projects.Update(project);
+            _dbContext.SaveChanges();
             return RedirectToAction("Profil", "Home");
         }
         private string currentUserId()
