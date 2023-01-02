@@ -8,3 +8,32 @@
 
 <a asp-controller="CV" asp-action="Edit" asp-route-id="@Model.Cv.ID">Ändra uppgifter</a>
 
+<h2>sambandshoran: @Model.Cv.Work_CV</h2>
+
+<h2>Arbetserfarenhet</h2>
+
+<div>
+	<table class="table-bordered">
+		<thead>
+			<tr>
+				<td>Id</td>
+				<td>Företag</td>
+				<td>Roll</td>
+				<td>Startdatum</td>
+				<td>Slutdatum</td>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var work in Model.Works)
+			{
+				<tr>
+					<td>@work.Id</td>
+					<td>@work.Name</td>
+					<td>@work.Role</td>
+					<td>@work.StartDate</td>
+					<td>@work.EndDate</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>

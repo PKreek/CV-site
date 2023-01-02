@@ -1,4 +1,6 @@
 ﻿@using CV_Site_MVC.Models
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<User> signInManager;
 @model List<Project>
 
 <h2>Lista av tillgängliga projekt att gå med i</h2>
@@ -12,6 +14,8 @@
 				<td>Beskrivning</td>
 				<td>Startdatum</td>
 				<td>Slutdatum</td>
+				<td>Projektledare</td>
+				<td>Personer i projekt</td>
 				
 			</tr>
 		</thead>
@@ -24,6 +28,15 @@
 					<td>@project.Description</td>
 					<td>@project.StartDate</td>
 					<td>@project.EndDate</td>
+					<td>@project.User.UserName</td>
+					<td></td>
+					@if (signInManager.IsSignedIn(User))
+					{
+					<td>
+					   <input type="submit" value="Gå med" class="submitbutton"/>
+					</td>
+					}
+
 				</tr>
 			}
 		</tbody>

@@ -1,5 +1,6 @@
 ﻿using CV_Site_MVC.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 
@@ -23,7 +24,13 @@ namespace CV_Site_MVC.Controllers
 
             CV cv = _dbContext.cVs.Where(c => c.UserID.Equals(currentUserId())).FirstOrDefault<CV>();
 
-            if (cv != null) model.Cv = cv;
+            if (cv != null)
+            { 
+                model.Cv = cv;
+                model.Works = _dbContext.Works.ToList<Work>();
+
+                //model.Works = _dbContext.Works.Where(w => w.Work_CV.Equals(model.Cv.Work_CV)).ToList<Work>();
+            }
             else
             {
                 model.Cv = new CV(currentUserId());
@@ -54,6 +61,7 @@ namespace CV_Site_MVC.Controllers
         [HttpPost]
         public IActionResult Edit(CV cv)
         {
+            cv.UserID = currentUserId();
             _dbContext.cVs.Update(cv);
             _dbContext.SaveChanges();
 
