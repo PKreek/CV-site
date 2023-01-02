@@ -35,16 +35,17 @@
 						@users.User.UserName
 					}
 					</td>
-					console.log(@project.Id)
 					@if (User.Identity.IsAuthenticated)
-					{				
-					<td>			
-					<form method="post" asp-controller="Project" asp-action="JoinProject" asp-route-projId="@project.Id">
-					   <button type="submit">Gå med</button>
-					</form>
-					</td>
+					{
+						@if (Model.UserInProjects.Where(x => x.User.UserName.Equals(User.Identity.Name) && x.ProjektID == project.Id).FirstOrDefault() == null)
+						{
+							<td>	
+								<form method="post" asp-controller="Project" asp-action="JoinProject" asp-route-projId="@project.Id">
+									<button type="submit">Gå med</button>
+								</form>
+							</td>
+						}
 					}
-					console.log(@project.Id)
 
 				</tr>
 			}
