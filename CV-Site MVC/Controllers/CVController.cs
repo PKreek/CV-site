@@ -23,13 +23,14 @@ namespace CV_Site_MVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult CV()
+        public IActionResult CV(string id)
         {
             CvViewModel model = new CvViewModel();
 
-            model.UserID = currentUserId();
+            //model.UserID = currentUserId();
+            model.UserID = id;
 
-            CV cv = _dbContext.cVs.Where(c => c.UserID.Equals(currentUserId())).FirstOrDefault<CV>();
+            CV cv = _dbContext.cVs.Where(c => c.UserID.Equals(id)).FirstOrDefault<CV>();
 
             if (cv != null)
             { 
@@ -37,7 +38,7 @@ namespace CV_Site_MVC.Controllers
             }
             else
             {
-                model.Cv = new CV(currentUserId());
+                model.Cv = new CV(id);
                 _dbContext.cVs.Add(model.Cv);
                 _dbContext.SaveChanges();
             }
@@ -49,21 +50,11 @@ namespace CV_Site_MVC.Controllers
                     .Select(i => i.WorkID).Contains(w.Id)).ToList();
             model.CvUser = _dbContext.Users.Where(u => u.Id.Equals(model.UserID)).First();
 
-            ClaimsPrincipal currentUser = this.User;
-
-            //var user = _userManager.GetUserAsync(User).Result;
+            if (User.Identity.IsAuthenticated)
+                model.IsMyCv = id.Equals(currentUserId()) ? true : false;
 
             return View(model);
         }
-
-        //public IActionResult NewCV(CV cv)
-        //{
-        //    cv.UserID = currentUserId();
-        //    _dbContext.cVs.Add(cv);
-        //    _dbContext.SaveChanges();
-
-        //    return RedirectToAction("CV");
-        //}
 
         [HttpGet]
         public IActionResult Edit(int id)
