@@ -33,10 +33,6 @@ namespace CV_Site_MVC.Controllers
             if (cv != null)
             { 
                 model.Cv = cv;
-                model.Works = _dbContext.Works.Where(w => _dbContext.Work_CVs
-                    .Where(c => c.CVID.Equals(cv.ID))
-                    .Select(i => i.WorkID).Contains(w.Id)).ToList();
-                model.Skills = _dbContext.Skills.Where(s => s.CVId.Equals(cv.ID)).ToList<Skill>();
             }
             else
             {
@@ -44,6 +40,11 @@ namespace CV_Site_MVC.Controllers
                 _dbContext.cVs.Add(model.Cv);
                 _dbContext.SaveChanges();
             }
+
+            model.Skills = _dbContext.Skills.Where(s => s.CVId.Equals(model.Cv.ID)).ToList<Skill>();
+            model.Works = _dbContext.Works.Where(w => _dbContext.Work_CVs
+                    .Where(c => c.CVID.Equals(model.Cv.ID))
+                    .Select(i => i.WorkID).Contains(w.Id)).ToList();
 
             return View(model);
         }
@@ -207,7 +208,6 @@ namespace CV_Site_MVC.Controllers
             string uploadsFolder = Path.Combine(hostingEnvironment.WebRootPath);
             string uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
             string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-            //string filePath = Path.Combine(uploadsFolder, model.Photo.FileName);
             model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
 
             CV cv = _dbContext.cVs.Where(c => c.UserID.Equals(currentUserId())).First();
