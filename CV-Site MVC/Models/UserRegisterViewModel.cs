@@ -9,6 +9,8 @@ namespace CV_Site_MVC.Models
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "Ange ett lösenord")]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8}$",
+         ErrorMessage = "Lösenordet måste innehålla minst 8 tecken varav minst en stor bokstav, en siffra och ett specialtecken")]
         [DataType(DataType.Password)]
         [Compare("ConfirmPassword")]
         public string PassWord { get; set; }
