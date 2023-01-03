@@ -58,12 +58,7 @@
                         @Html.DisplayFor(modelItem => item.Phone)
                     </td>
                     <td><a asp-controller="CV" asp-action="CV" asp-route-id="@item.UserID">Till CV</a></td>
-                    <td>
-
-                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                    </td>
+                   
                 </tr>
             }
         }
