@@ -16,7 +16,8 @@
 				<tbody>
 				@if(User.Identity.IsAuthenticated)
 			    {
-					@foreach (CV cV in Model.listOfCV)
+					var ran = new Random();
+					@foreach (CV cV in Model.listOfCV.OrderBy(x => ran.Next()).Take(3))
 					{
 						<tr>
 						<td>@cV.User.UserName</td>
@@ -26,8 +27,8 @@
 			    }
 				else
 				{
-					
-					@foreach(var user in Model.PrivateCVUser)
+					var ran = new Random();
+					@foreach(var user in Model.PrivateCVUser.OrderBy(x => ran.Next()).Take(3))
 					{
 						<tr>
 						<td>@user.UserName</td>
