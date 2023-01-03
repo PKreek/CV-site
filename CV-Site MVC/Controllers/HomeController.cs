@@ -35,7 +35,7 @@ namespace CV_Site_MVC.Controllers
         public IActionResult Index()
         {
             IndexViewModel model = new IndexViewModel();
-            if (_dbContext.Projects.OrderBy(x => x.Id).Last() != null)
+            if (_dbContext.Projects.Count() > 0)
             {
                 Project lastProject = _dbContext.Projects.OrderBy(x => x.Id).Last();
                 model.lastProject = lastProject;
