@@ -49,12 +49,24 @@
 					<td>@Model.lastProject.StartDate</td>
 					<td>@Model.lastProject.EndDate</td>
 					<td>@Model.lastProject.User.UserName</td>
-					<td>
-						@foreach (var users in Model.UserInProjects.Where(x => x.ProjektID == Model.lastProject.Id))
-						{
-							@users.User.UserName
-						}
-					</td>
+					@if (User.Identity.IsAuthenticated)
+					{
+						<td>
+							@foreach (var users in Model.UserInProjects.Where(x => x.ProjektID == Model.lastProject.Id))
+							{
+								@users.User.UserName
+							}
+						</td>
+					}
+					else
+					{
+						<td>
+							@foreach(var users in Model.UsersWithPrivateCV.Where(x => x.ProjektID == Model.lastProject.Id))
+							{
+								@users.User.UserName
+							}
+						</td>
+					}
 					<td>
 						@if (User.Identity.IsAuthenticated)
 						{

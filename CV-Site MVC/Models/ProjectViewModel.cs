@@ -14,6 +14,7 @@ namespace CV_Site_MVC.Models
 
         public User User { get; set; }
 
+        //håller information om användarens ID med privata CV
         public List<string> cVLista{ get; set; }   
 
     }
