@@ -46,6 +46,7 @@ namespace CV_Site_MVC.Controllers
             model.listOfCV = cvList;
             model.UserInProjects = usersInProject;
             model.cVLista = _dbContext.cVs.Where(x => x.PrivateCV == false).Select(x => x.UserID).ToList();
+            model.PrivateCVUser = model.PrivateCVUser = _dbContext.Users.Where(x => (model.cVLista.Contains(x.Id))).ToList();
             model.UsersWithPrivateCV = _dbContext.Project_Users.Where(x => (model.cVLista.Contains(x.UserID))).ToList();
             return View(model);
         }
