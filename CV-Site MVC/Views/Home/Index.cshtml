@@ -61,7 +61,7 @@
 							@if (Model.UserInProjects.Where(x => x.User.UserName.Equals(User.Identity.Name) && x.ProjektID == Model.lastProject.Id).FirstOrDefault() == null)
 							{
 								<td>
-									<form method="post" asp-controller="Project" asp-action="JoinProject" asp-route-projId="@Model.lastProject.Id">
+									<form method="post" asp-controller="Home" asp-action="JoinProject" asp-route-projId="@Model.lastProject.Id">
 										<button type="submit">Gå med</button>
 									</form>
 								</td>
@@ -69,7 +69,7 @@
 							else
 							{
 								<td>
-									<form method="post" asp-controller="Project" asp-action="RemoveProject" asp-route-projId="@Model.lastProject.Id">
+									<form method="post" asp-controller="Home" asp-action="RemoveProject" asp-route-projId="@Model.lastProject.Id">
 										<button type="submit">Gå ur</button>
 									</form>
 								</td>
