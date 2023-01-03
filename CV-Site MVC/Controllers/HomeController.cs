@@ -58,7 +58,8 @@ namespace CV_Site_MVC.Controllers
                 ProfileViewModel model = new ProfileViewModel();
                 model.UserInProjects = _dbContext.Project_Users.ToList();
                 model.ProjectList = _dbContext.Projects.Where(x => x.UserId.Equals(user)).ToList();
-
+                model.ProjectsInvolved = _dbContext.Project_Users.Where(x => x.UserID.Equals(user)).ToList();
+        
                 return View(model);  
         }
 
