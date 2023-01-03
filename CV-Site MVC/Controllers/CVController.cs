@@ -103,13 +103,17 @@ namespace CV_Site_MVC.Controllers
         [HttpPost]
         public IActionResult EditWork(Work work)
         {
-            _dbContext.Works.Update(work);
-            _dbContext.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                _dbContext.Works.Update(work);
+                _dbContext.SaveChanges();
 
-            //_dbContext.cVs.Where(c => _dbContext.Work_CVs
-            //    .Where(wc => wc.CVID.)
-
-            return RedirectToAction("Work", new { id = cvIdCurrentUser() });
+                return RedirectToAction("Work", new { id = cvIdCurrentUser() });
+            }
+            else
+            {
+                return View(work);
+            }
         }
 
         [HttpGet]
@@ -172,12 +176,19 @@ namespace CV_Site_MVC.Controllers
         [HttpPost]
         public IActionResult EditSkill(Skill skill)
         {
-            skill.CVId = _dbContext.cVs.Where(c => c.UserID.Equals(currentUserId()))
+            if (ModelState.IsValid)
+            {
+                skill.CVId = _dbContext.cVs.Where(c => c.UserID.Equals(currentUserId()))
                     .Select(i => i.ID).First();
-            _dbContext.Skills.Update(skill);
-            _dbContext.SaveChanges();
+                _dbContext.Skills.Update(skill);
+                _dbContext.SaveChanges();
 
-            return RedirectToAction("Skill", new { id = cvIdCurrentUser() });
+                return RedirectToAction("Skill", new { id = cvIdCurrentUser() });
+            }
+            else
+            {
+                return View(skill);
+            }
         }
 
         [HttpGet]
@@ -232,12 +243,19 @@ namespace CV_Site_MVC.Controllers
         [HttpPost]
         public IActionResult EditEducation(Education education)
         {
-            education.CVId = _dbContext.cVs.Where(c => c.UserID.Equals(currentUserId()))
+            if (ModelState.IsValid)
+            {
+                education.CVId = _dbContext.cVs.Where(c => c.UserID.Equals(currentUserId()))
                     .Select(i => i.ID).First();
-            _dbContext.Educations.Update(education);
-            _dbContext.SaveChanges();
+                _dbContext.Educations.Update(education);
+                _dbContext.SaveChanges();
 
             return RedirectToAction("education", new { id = cvIdCurrentUser() });
+            }
+            else
+            {
+                return View(education);
+            }
         }
 
         [HttpGet]

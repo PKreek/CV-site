@@ -22,7 +22,7 @@ namespace CV_Site_MVC.Models
         [Phone(ErrorMessage = "Ange ett giltigt telefonnummer")]
         public string Phone { get; set; }
         //[Required(ErrorMessage = "Ange förnamn")]
-        [StringLength(10, ErrorMessage = "Max 10 tecken")]
+        [StringLength(100, ErrorMessage = "Max 100 tecken")]
         public string FirstName { get; set; }
         //[Required(ErrorMessage = "Ange efternamn")]
         [StringLength(100, ErrorMessage = "Max 100 tecken")]
