@@ -25,21 +25,23 @@
 	</div>
 <div>
 	<h3>Projekt</h3>
-	<table class="table-bordered">
-		<thead>
-			<tr>
-				<td>Id</td>
-				<td>Projektnamn</td>
-				<td>Beskrivning</td>
-				<td>Startdatum</td>
-				<td>Slutdatum</td>
-				<td>Projektledare</td>
-				<td>Personer med i projektet</td>
+	@if (Model.lastProject != null)
+	{
+		<table class="table-bordered">
+			<thead>
+				<tr>
+					<td>Id</td>
+					<td>Projektnamn</td>
+					<td>Beskrivning</td>
+					<td>Startdatum</td>
+					<td>Slutdatum</td>
+					<td>Projektledare</td>
+					<td>Personer med i projektet</td>
 
-			</tr>
-		</thead>
-		<tbody>
-			
+				</tr>
+			</thead>
+			<tbody>
+
 				<tr>
 					<td>@Model.lastProject.Id</td>
 					<td>@Model.lastProject.ProjectName</td>
@@ -47,37 +49,38 @@
 					<td>@Model.lastProject.StartDate</td>
 					<td>@Model.lastProject.EndDate</td>
 					<td>@Model.lastProject.User.UserName</td>
-				<td>
-					@foreach (var users in Model.UserInProjects.Where(x => x.ProjektID == Model.lastProject.Id))
-					{
-						@users.User.UserName
-					}
-				</td>
-				<td>
-					@if (User.Identity.IsAuthenticated)
-					{
-						@if (Model.UserInProjects.Where(x => x.User.UserName.Equals(User.Identity.Name) && x.ProjektID == Model.lastProject.Id).FirstOrDefault() == null)
+					<td>
+						@foreach (var users in Model.UserInProjects.Where(x => x.ProjektID == Model.lastProject.Id))
 						{
-						<td>
-							<form method="post" asp-controller="Project" asp-action="JoinProject" asp-route-projId="@Model.lastProject.Id">
-								<button type="submit">Gå med</button>
-							</form>
-						</td>
+							@users.User.UserName
 						}
-						else
+					</td>
+					<td>
+						@if (User.Identity.IsAuthenticated)
 						{
-						<td>
-							<form method="post" asp-controller="Project" asp-action="RemoveProject" asp-route-projId="@Model.lastProject.Id">
-								<button type="submit">Gå ur</button>
-							</form>
-						</td>
+							@if (Model.UserInProjects.Where(x => x.User.UserName.Equals(User.Identity.Name) && x.ProjektID == Model.lastProject.Id).FirstOrDefault() == null)
+							{
+								<td>
+									<form method="post" asp-controller="Project" asp-action="JoinProject" asp-route-projId="@Model.lastProject.Id">
+										<button type="submit">Gå med</button>
+									</form>
+								</td>
+							}
+							else
+							{
+								<td>
+									<form method="post" asp-controller="Project" asp-action="RemoveProject" asp-route-projId="@Model.lastProject.Id">
+										<button type="submit">Gå ur</button>
+									</form>
+								</td>
+							}
 						}
-					}
 					</td>
 				</tr>
-			
-		</tbody>
-	</table>
+
+			</tbody>
+		</table>
+	}
 </div>
 
 
