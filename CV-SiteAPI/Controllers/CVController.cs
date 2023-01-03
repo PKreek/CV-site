@@ -26,7 +26,7 @@ namespace CV_SiteAPI.Controllers
             return _siteContext.cVs.ToList();
         }
 
-        [HttpGet("ID")]
+        [HttpGet("{ID}")]
         public CV Get(int ID)
         {
             return _siteContext.cVs.Find(ID);
