@@ -4,34 +4,28 @@
     ViewBag.Title = "Index";
 }
 <div style="font-family:Arial">
-    <h2>Employee List</h2>
+    <h2>Sök användare</h2>
     <p>
         @using (@Html.BeginForm("Index", "Search", FormMethod.Get))
         {
-            <b>Search By:</b>
+            <b>Sök:</b>
     @*        @Html.RadioButton("searchBy", "UserName", true) <text>Name</text>
            @Html.RadioButton("searchBy", "Gender") <text>Gender</text>*@
 
             <br />
-            @Html.TextBox("search") <input type="submit" value="search" />
+            @Html.TextBox("search") <input type="submit" value="Sök" />
         }
     </p>
-    <table border="1">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Phone)
-            </th>
-            <th>Action</th>
-        </tr>
+    <table class="table-bordered">
+        <thead>
+                <tr class="font-weight-bold">
+                    <td>Förnamn</td>
+					<td>Efternamn</td>
+					<td>Email</td>
+					<td>Telefonnummer</td>
+					<td>Gå till CV</td>
+				</tr>
+			</thead>
         @if (Model.Count() == 0)
         {
             <tr>

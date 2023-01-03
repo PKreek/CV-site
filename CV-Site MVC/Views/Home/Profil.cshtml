@@ -10,19 +10,19 @@
 }
 
 <div>
-	<a asp-controller="Account" asp-action="ChangePassword">Ändra din profil</a>
+	<a class="text-dark" asp-controller="Account" asp-action="ChangePassword">Ändra din profil</a>
 </div>
 <div>
-	<a asp-controller="CV" asp-action="CV" asp-route-id="@id">Gå till ditt CV</a>
+	<a class="text-dark" asp-controller="CV" asp-action="CV" asp-route-id="@id">Gå till ditt CV</a>
 </div>
 <div>
-	<a asp-controller="Project" asp-action="Project">Starta ett projekt</a>
+	<a class="text-dark" asp-controller="Project" asp-action="Project">Starta ett projekt</a>
 </div>
 <div>
 	
-	<h5>Projekt du skapat</h5>
 	@if (Model.ProjectList.Count() > 0)
 	{
+		<h5>Projekt du skapat</h5>
 		<table class="table-bordered">
 			<thead>
 				<tr>

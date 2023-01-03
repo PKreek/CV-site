@@ -2,26 +2,29 @@
 @using CV_Site_MVC.Models
 @model IndexViewModel
 
-	<div>
-		<h3>CV</h3>
+<div>
+	<h3>CV</h3>
+	@if(Model.listOfCV != null)
+	{
 		<table class="table-bordered">
-	<thead>
-		<tr>
-			<td>Id</td>
-			<td>Utbildning</td>
-		</tr>
-	</thead>
-	<tbody>
-			@foreach (CV cV in Model.listOfCV)
-			{
-				<tr>
-					<td>@cV.ID</td>
-					<td>@cV.Utbildning</td>
-					<td><a asp-controller="CV" asp-action="CV" asp-route-id="@cV.UserID">Till CV</a></td>
+			<thead>
+				<tr class="font-weight-bold">
+					<td>Användare</td>
+					<td>Gå till CV</td>
+			
 				</tr>
-			}
-	</tbody>
-</table>
+			</thead>
+				<tbody>
+					@foreach (CV cV in Model.listOfCV)
+					{
+					<tr>
+						<td>@cV.User.UserName</td>
+						<td><a asp-controller="CV" asp-action="CV" asp-route-id="@cV.UserID">Till CV</a></td>
+					</tr>
+					}
+				</tbody>
+		</table>
+	}
 	</div>
 <div>
 	<h3>Projekt</h3>
@@ -29,7 +32,7 @@
 	{
 		<table class="table-bordered">
 			<thead>
-				<tr>
+				<tr class="font-weight-bold">
 					<td>Id</td>
 					<td>Projektnamn</td>
 					<td>Beskrivning</td>
