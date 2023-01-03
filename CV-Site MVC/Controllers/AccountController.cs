@@ -48,7 +48,12 @@ namespace CV_Site_MVC.Controllers
 
                 var result = await userManager.CreateAsync(user, userRegister.PassWord);
                 if(result.Succeeded)
-                {     
+                {
+                    CV cv = new CV(user.Id);
+                    cv.FirstName = userRegister.FirstName;
+                    cv.LastName = userRegister.LastName;
+                    _dbContext.cVs.Add(cv);
+                    _dbContext.SaveChanges();
                     await logInManager.SignInAsync(user, isPersistent: true);
                     return RedirectToAction("Profil", "Home");
                 }
