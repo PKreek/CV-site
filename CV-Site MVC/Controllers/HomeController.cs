@@ -34,11 +34,17 @@ namespace CV_Site_MVC.Controllers
         
         public IActionResult Index()
         {
-            List<Project> projectList = _dbContext.Projects.ToList();
+
+            Project lastProject = _dbContext.Projects.OrderBy(x => x.Id).Last();
             List<CV> cvList = _dbContext.cVs.ToList();
+            List <Project_User> usersInProject = _dbContext.Project_Users.ToList();
             IndexViewModel model = new IndexViewModel();
-            model.listOfProjects = projectList;
+            if (lastProject != null)
+            {
+                model.lastProject = lastProject;
+            }
             model.listOfCV = cvList;
+            model.UserInProjects = usersInProject;
             return View(model);
         }
 
