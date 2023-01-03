@@ -1,15 +1,13 @@
 ﻿@model CV
 
-<h1>@Model.Utbildning</h1>
-
 <form asp-controller="CV" asp-action="Edit" method="post">
 	<label>Förnamn: </label><br />
-	<input asp-for="FirstName" type="text"/>
+	<input asp-for="FirstName" type="text"/><br />
 	<label>Efternamn: </label><br />
-	<input asp-for="LastName" type="text"/>
+	<input asp-for="LastName" type="text"/><br />
 	<label>Email: </label><br />
-	<input asp-for="Email" type="text"/>
-	<label>Telfonnummer: </label><br />
-	<input asp-for="Phone" type="text"/>
+	<input asp-for="Email" type="text"/><br />
+	<label>Telefonnummer: </label><br />
+	<input asp-for="Phone" type="text"/><br />
 	<input type="submit" value="Spara ändringar" class="submit" />
 </form>

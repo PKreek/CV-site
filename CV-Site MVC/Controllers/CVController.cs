@@ -99,6 +99,9 @@ namespace CV_Site_MVC.Controllers
             _dbContext.Works.Update(work);
             _dbContext.SaveChanges();
 
+            //_dbContext.cVs.Where(c => _dbContext.Work_CVs
+            //    .Where(wc => wc.CVID.)
+
             return RedirectToAction("Work");
         }
 
