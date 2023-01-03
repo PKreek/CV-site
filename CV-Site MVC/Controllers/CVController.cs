@@ -67,12 +67,19 @@ namespace CV_Site_MVC.Controllers
         [HttpPost]
         public IActionResult Edit(CV cv)
         {
-            cv.UserID = currentUserId();
-            cv.PhotoPath = _dbContext.cVs.Where(x => x.UserID.Equals(currentUserId())).Select(y => y.PhotoPath).First();
-            _dbContext.cVs.Update(cv);
-            _dbContext.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                cv.UserID = currentUserId();
+                cv.PhotoPath = _dbContext.cVs.Where(x => x.UserID.Equals(currentUserId())).Select(y => y.PhotoPath).First();
+                _dbContext.cVs.Update(cv);
+                _dbContext.SaveChanges();
 
-            return RedirectToAction("CV", new { id = currentUserId() });
+                return RedirectToAction("CV", new { id = currentUserId() });
+            }
+            else
+            {
+                return View(cv);
+            }
         }
 
         [HttpGet]

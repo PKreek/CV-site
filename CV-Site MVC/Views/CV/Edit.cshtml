@@ -1,6 +1,8 @@
 ﻿@model CV
 
-<form asp-controller="CV" asp-action="Edit" method="post">
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-controller="CV" asp-action="Edit" method="post" class="register-form" novalidate>
 	<label>Förnamn: </label><br />
 	<input asp-for="FirstName" type="text"/><br />
 	<label>Efternamn: </label><br />
