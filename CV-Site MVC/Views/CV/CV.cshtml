@@ -3,19 +3,18 @@
 
 <h1>CV</h1>
 
-@{
-	if (Model.IsMyCv)
+
+@if (Model.IsMyCv)
+{
+	@if (Model.Cv.PrivateCV)
 	{
-		@if (Model.Cv.PrivateCV)
-		{
-			<Label>Ditt CV är privat</Label>
-			<a asp-controller="CV" asp-action="Privat">Byt till publikt</a>
-		}
-		else
-		{
-			<label>Ditt CV är publikt</label>
-			<a asp-controller="CV" asp-action="Privat">Byt till privat</a>
-		}
+		<Label>Ditt CV är privat</Label>
+		<a asp-controller="CV" asp-action="Privat">Byt till publikt</a>
+	}
+	else
+	{
+		<label>Ditt CV är publikt</label>
+		<a asp-controller="CV" asp-action="Privat">Byt till privat</a>
 	}
 }
 
