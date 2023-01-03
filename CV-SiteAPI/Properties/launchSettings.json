@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/cv",
+      "launchUrl": "api/message",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -20,7 +20,7 @@
     "CV_SiteAPI": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/cv",
+      "launchUrl": "api/message",
       "applicationUrl": "https://localhost:13756;http://localhost:34862",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
