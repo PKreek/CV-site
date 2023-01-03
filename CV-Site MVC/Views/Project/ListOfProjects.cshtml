@@ -6,57 +6,60 @@
 <h2>Lista av tillgängliga projekt att gå med i</h2>
 
 <div>
-	<table class="table-bordered">
-		<thead>
-			<tr>
-				<td>Id</td>
-				<td>Projektnamn</td>
-				<td>Beskrivning</td>
-				<td>Startdatum</td>
-				<td>Slutdatum</td>
-				<td>Projektledare</td>
-				<td>Personer i projekt</td>
-				
-			</tr>
-		</thead>
-		<tbody>
-			@foreach (var project in Model.ProjectList)
-			{
+	@if (Model.ProjectList.Count() > 0)
+	{
+		<table class="table-bordered">
+			<thead>
 				<tr>
-					<td>@project.Id</td>
-					<td>@project.ProjectName</td>
-					<td>@project.Description</td>
-					<td>@project.StartDate</td>
-					<td>@project.EndDate</td>
-					<td>@project.User.UserName</td>
-					<td>
-					@foreach (var users in Model.UserInProjects.Where(x=>x.ProjektID == project.Id))
-					{
-						@users.User.UserName
-					}
-					</td>
-					@if (User.Identity.IsAuthenticated)
-					{
-						@if (Model.UserInProjects.Where(x => x.User.UserName.Equals(User.Identity.Name) && x.ProjektID == project.Id).FirstOrDefault() == null)
-						{
-							<td>	
-								<form method="post" asp-controller="Project" asp-action="JoinProject" asp-route-projId="@project.Id">
-									<button type="submit">Gå med</button>
-								</form>
-							</td>
-						}
-						else
-						{
-							<td>
-								<form method="post" asp-controller="Project" asp-action="RemoveProject" asp-route-projId="@project.Id">
-									<button type="submit">Gå ur</button>
-								</form>
-							</td>
-						}
-					}
+					<td>Id</td>
+					<td>Projektnamn</td>
+					<td>Beskrivning</td>
+					<td>Startdatum</td>
+					<td>Slutdatum</td>
+					<td>Projektledare</td>
+					<td>Personer i projekt</td>
 
 				</tr>
-			}
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				@foreach (var project in Model.ProjectList)
+				{
+					<tr>
+						<td>@project.Id</td>
+						<td>@project.ProjectName</td>
+						<td>@project.Description</td>
+						<td>@project.StartDate</td>
+						<td>@project.EndDate</td>
+						<td>@project.User.UserName</td>
+						<td>
+							@foreach (var users in Model.UserInProjects.Where(x => x.ProjektID == project.Id))
+							{
+								@users.User.UserName
+							}
+						</td>
+						@if (User.Identity.IsAuthenticated)
+						{
+							@if (Model.UserInProjects.Where(x => x.User.UserName.Equals(User.Identity.Name) && x.ProjektID == project.Id).FirstOrDefault() == null)
+							{
+								<td>	
+									<form method="post" asp-controller="Project" asp-action="JoinProject" asp-route-projId="@project.Id">
+										<button type="submit">Gå med</button>
+									</form>
+								</td>
+							}
+							else
+							{
+								<td>
+									<form method="post" asp-controller="Project" asp-action="RemoveProject" asp-route-projId="@project.Id">
+										<button type="submit">Gå ur</button>
+									</form>
+								</td>
+							}
+						}
+
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
 </div>
