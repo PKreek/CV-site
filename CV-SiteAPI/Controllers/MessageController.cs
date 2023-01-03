@@ -25,10 +25,10 @@ namespace CV_SiteAPI.Controllers
             return _siteContext.Messages.ToList();
         }
 
-        [HttpGet("{ID}")]
-        public Message Get(int ID)
+        [HttpGet("{id}")]
+        public Message Get(int id)
         {
-            return _siteContext.Messages.Find(ID);
+            return _siteContext.Messages.Find(id);
 
         }
 
@@ -50,6 +50,14 @@ namespace CV_SiteAPI.Controllers
                 _siteContext.Messages.Update(message);
                 _siteContext.SaveChanges();
             }
+        }
+
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            Message message = _siteContext.Messages.Find(id);
+            _siteContext.Messages.Remove(message);
+            _siteContext.SaveChanges();
         }
     }
 }
