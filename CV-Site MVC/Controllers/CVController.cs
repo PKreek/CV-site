@@ -102,7 +102,7 @@ namespace CV_Site_MVC.Controllers
             //_dbContext.cVs.Where(c => _dbContext.Work_CVs
             //    .Where(wc => wc.CVID.)
 
-            return RedirectToAction("Work");
+            return RedirectToAction("Work", new { id = cvIdCurrentUser() });
         }
 
         [HttpGet]
@@ -127,7 +127,7 @@ namespace CV_Site_MVC.Controllers
 
                 _dbContext.SaveChanges();
 
-                return RedirectToAction("Work");
+                return RedirectToAction("Work", new { id = cvIdCurrentUser() });
             }
             else
             {
@@ -143,7 +143,7 @@ namespace CV_Site_MVC.Controllers
             _dbContext.Works.Remove(work);
             _dbContext.SaveChanges();
 
-            return RedirectToAction("Work");
+            return RedirectToAction("Work", new { id = cvIdCurrentUser() });
         }
 
         [HttpGet]
@@ -170,7 +170,7 @@ namespace CV_Site_MVC.Controllers
             _dbContext.Skills.Update(skill);
             _dbContext.SaveChanges();
 
-            return RedirectToAction("Skill");
+            return RedirectToAction("Skill", new { id = cvIdCurrentUser() });
         }
 
         [HttpGet]
@@ -189,7 +189,7 @@ namespace CV_Site_MVC.Controllers
                 _dbContext.Skills.Add(skill);
                 _dbContext.SaveChanges();
 
-                return RedirectToAction("Skill");
+                return RedirectToAction("Skill", new { id = cvIdCurrentUser() });
             }
             else
             {
@@ -203,7 +203,7 @@ namespace CV_Site_MVC.Controllers
             _dbContext.Skills.Remove(skill);
             _dbContext.SaveChanges();
 
-            return RedirectToAction("Skill");
+            return RedirectToAction("Skill", new { id = cvIdCurrentUser() });
         }
 
         [HttpGet]
@@ -230,7 +230,7 @@ namespace CV_Site_MVC.Controllers
             _dbContext.Educations.Update(education);
             _dbContext.SaveChanges();
 
-            return RedirectToAction("education");
+            return RedirectToAction("education", new { id = cvIdCurrentUser() });
         }
 
         [HttpGet]
@@ -249,7 +249,7 @@ namespace CV_Site_MVC.Controllers
                 _dbContext.Educations.Add(education);
                 _dbContext.SaveChanges();
 
-                return RedirectToAction("Education");
+                return RedirectToAction("Education", new { id = cvIdCurrentUser() });
             }
             else
             {
@@ -263,7 +263,7 @@ namespace CV_Site_MVC.Controllers
             _dbContext.Educations.Remove(education);
             _dbContext.SaveChanges();
 
-            return RedirectToAction("Education");
+            return RedirectToAction("Education", new { id = cvIdCurrentUser() });
         }
 
         [HttpGet]
@@ -311,6 +311,12 @@ namespace CV_Site_MVC.Controllers
         {
             ClaimsPrincipal currentUser = this.User;
             return currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+        }
+
+        private int cvIdCurrentUser()
+        {
+            return _dbContext.cVs.Where(c => c.UserID.Equals(currentUserId()))
+                    .Select(i => i.ID).First();
         }
     }
 }
