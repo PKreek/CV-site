@@ -21,15 +21,15 @@ namespace CV_SiteAPI.Controllers
         }
 
         [HttpGet]
-        public List<CV> Get()
+        public List<Project> Get()
         {
-            return _siteContext.cVs.ToList();
+            return _siteContext.Projects.ToList();
         }
 
         [HttpGet("ID")]
-        public CV Get(int ID)
+        public Project Get(int ID)
         {
-            return _siteContext.cVs.Find(ID);
+            return _siteContext.Projects.Find(ID);
 
         }
 
