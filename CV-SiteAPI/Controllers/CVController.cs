@@ -10,7 +10,7 @@ using CV_SiteAPI.Models;
 
 namespace CV_SiteAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/cv")]
     [ApiController]
     public class SiteController : ControllerBase
     {
@@ -21,15 +21,15 @@ namespace CV_SiteAPI.Controllers
         }
 
         [HttpGet]
-        public List<Project> Get()
+        public List<CV> Get()
         {
-            return _siteContext.Projects.ToList();
+            return _siteContext.cVs.ToList();
         }
 
         [HttpGet("ID")]
-        public Project Get(int ID)
+        public CV Get(int ID)
         {
-            return _siteContext.Projects.Find(ID);
+            return _siteContext.cVs.Find(ID);
 
         }
 
