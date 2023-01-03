@@ -72,7 +72,7 @@ namespace CV_Site_MVC.Controllers
             _dbContext.cVs.Update(cv);
             _dbContext.SaveChanges();
 
-            return RedirectToAction("CV");
+            return RedirectToAction("CV", new { id = currentUserId() });
         }
 
         [HttpGet]
@@ -301,7 +301,7 @@ namespace CV_Site_MVC.Controllers
             _dbContext.cVs.Update(cv);
             _dbContext.SaveChanges();
 
-            return RedirectToAction("CV");
+            return RedirectToAction("CV", new { id = currentUserId() });
         }
 
         private string currentUserId()

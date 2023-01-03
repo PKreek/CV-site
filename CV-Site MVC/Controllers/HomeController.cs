@@ -34,15 +34,15 @@ namespace CV_Site_MVC.Controllers
         
         public IActionResult Index()
         {
-
-            Project lastProject = _dbContext.Projects.OrderBy(x => x.Id).Last();
-            List<CV> cvList = _dbContext.cVs.ToList();
-            List <Project_User> usersInProject = _dbContext.Project_Users.ToList();
             IndexViewModel model = new IndexViewModel();
-            if (lastProject != null)
+            if (_dbContext.Projects.Count() > 0)
             {
+                Project lastProject = _dbContext.Projects.OrderBy(x => x.Id).Last();
                 model.lastProject = lastProject;
             }
+
+            List<CV> cvList = _dbContext.cVs.ToList();
+            List <Project_User> usersInProject = _dbContext.Project_Users.ToList();
             model.listOfCV = cvList;
             model.UserInProjects = usersInProject;
             return View(model);
@@ -58,6 +58,31 @@ namespace CV_Site_MVC.Controllers
                 model.ProjectList = _dbContext.Projects.Where(x => x.UserId.Equals(user)).ToList();
 
                 return View(model);  
+        }
+
+        [HttpPost]
+        public IActionResult JoinProject(int projId)
+        {
+            Project_User project_User = new Project_User();
+            project_User.project = _dbContext.Projects.Find(projId);
+            project_User.ProjektID = projId;
+            project_User.UserID = currentUserId();
+            Console.WriteLine(project_User.UserID + project_User.ProjektID);
+
+            _dbContext.Project_Users.Add(project_User);
+            _dbContext.SaveChanges();
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        public IActionResult RemoveProject(int projId)
+        {
+            Project_User project_User = new Project_User();
+            project_User.ProjektID = projId;
+            project_User.UserID = currentUserId();
+            _dbContext.Project_Users.Remove(project_User);
+            _dbContext.SaveChanges();
+            return RedirectToAction("Index", "Home");
         }
 
         private string currentUserId()

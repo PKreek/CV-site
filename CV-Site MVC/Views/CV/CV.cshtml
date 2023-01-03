@@ -3,12 +3,19 @@
 
 <h1>CV</h1>
 
-@if(Model.Cv.PrivateCV) {
-	<Label>Ditt CV är privat</Label>
-	<a asp-controller="CV" asp-action="Privat">Byt till publikt</a>
-}else{
-	<label>Ditt CV är publikt</label>
-	<a asp-controller="CV" asp-action="Privat">Byt till privat</a>
+
+@if (Model.IsMyCv)
+{
+	@if (Model.Cv.PrivateCV)
+	{
+		<Label>Ditt CV är privat</Label>
+		<a asp-controller="CV" asp-action="Privat">Byt till publikt</a>
+	}
+	else
+	{
+		<label>Ditt CV är publikt</label>
+		<a asp-controller="CV" asp-action="Privat">Byt till privat</a>
+	}
 }
 
 @{
@@ -17,7 +24,10 @@
 <div>
 	<img src="@photoPath" asp-append-version="true"/>
 </div>
-<a asp-controller="CV" asp-action="Image" asp-route-id="@Model.Cv.ID">Ladda upp foto</a>
+@if (Model.IsMyCv)
+{
+	<a asp-controller="CV" asp-action="Image" asp-route-id="@Model.Cv.ID">Ladda upp foto</a>
+}
 
 <h2>Personuppgifter</h2>
 
@@ -41,7 +51,11 @@
 		</tbody>
 	</table>
 </div>
-<a asp-controller="CV" asp-action="Edit" asp-route-id="@Model.Cv.ID">Ändra uppgifter</a>
+@if (Model.IsMyCv)
+{
+	<a asp-controller="CV" asp-action="Edit" asp-route-id="@Model.Cv.ID">Ändra uppgifter</a>
+}
+
 
 <h2>Kompetenser</h2>
 
@@ -62,7 +76,11 @@
 		</tbody>
 	</table>
 </div>
-<a asp-controller="CV" asp-action="Skill" asp-route-id="@Model.Cv.ID">Ändra uppgifter</a>
+@if (Model.IsMyCv)
+{
+	<a asp-controller="CV" asp-action="Skill" asp-route-id="@Model.Cv.ID">Ändra uppgifter</a>
+}
+
 
 <h2>Utbildningar</h2>
 
@@ -83,7 +101,11 @@
 		</tbody>
 	</table>
 </div>
-<a asp-controller="CV" asp-action="Education" asp-route-id="@Model.Cv.ID">Ändra uppgifter</a>
+@if (Model.IsMyCv)
+{
+	<a asp-controller="CV" asp-action="Education" asp-route-id="@Model.Cv.ID">Ändra uppgifter</a>
+}
+
 
 <h2>Arbetserfarenhet</h2>
 
@@ -110,4 +132,7 @@
 		</tbody>
 	</table>
 </div>
-<a asp-controller="CV" asp-action="Work" asp-route-id="@Model.Cv.ID">Ändra uppgifter</a>
+@if (Model.IsMyCv)
+{
+	<a asp-controller="CV" asp-action="Work" asp-route-id="@Model.Cv.ID">Ändra uppgifter</a>
+}

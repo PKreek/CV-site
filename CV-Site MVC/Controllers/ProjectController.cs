@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography.X509Certificates;
 
 namespace CV_Site_MVC.Controllers
 {
@@ -37,6 +38,13 @@ namespace CV_Site_MVC.Controllers
             ProjectViewModel model = new ProjectViewModel();
             model.ProjectList = _dbContext.Projects.ToList();
             model.UserInProjects = _dbContext.Project_Users.ToList();
+            model.cVLista = _dbContext.cVs.Where(x => x.PrivateCV == false).Select(x => x.UserID).ToList();
+            model.UsersWithPrivateCV = _dbContext.Project_Users.Where(x => (model.cVLista.Contains(x.UserID))).ToList();
+            foreach(var user in model.UsersWithPrivateCV)
+            {
+                Console.WriteLine(user);
+            }
+            
     
             return View(model);
         }

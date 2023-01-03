@@ -10,7 +10,11 @@ namespace CV_Site_MVC.Models
 
         public List<Project_User> UserInProjects { get; set; }
 
+        public List<Project_User> UsersWithPrivateCV { get; set; }
+
         public User User { get; set; }
+
+        public List<string> cVLista{ get; set; }   
 
     }
 }

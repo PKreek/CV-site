@@ -16,7 +16,8 @@ namespace CV_Site_MVC.Controllers
         private SignInManager<User> logInManager;
         private SiteContext _dbContext;
 
-        public AccountController(UserManager<User> _userManager, SignInManager<User> _logInManager, SiteContext dbContext)
+        public AccountController(UserManager<User> _userManager,
+          SignInManager<User> _logInManager, SiteContext dbContext)
         {
             this.userManager = _userManager;
             this.logInManager = _logInManager;
@@ -82,9 +83,9 @@ namespace CV_Site_MVC.Controllers
         [HttpGet]
         public IActionResult Edit()
         {
-            UserEditViewModel model = new UserEditViewModel();
+            User model = new User();
 
-            model.UserId = currentUserId();
+            model.Id = currentUserId();
             model.UserName = currentUserName();
 
             //User user = (User)_dbContext.Users.Where(c => c.Id.Equals(currentUserId()));
@@ -127,9 +128,48 @@ namespace CV_Site_MVC.Controllers
         //    return View();
         //}
 
+        [Route("change-password")]
+        public IActionResult ChangePassword()
+        {
+
+            return View();
+        }
+
+        [HttpPost("change-password")]
+        public async Task<IActionResult> ChangePassword(ChangePasswordModel model)
+        {
+
+
+
+            if (ModelState.IsValid)
+            {
+
+                var result = await ChangePasswordAsync(model);
+                if (result.Succeeded)
+                {
+                    ViewBag.IsSuccess = true;
+                    ModelState.Clear();
+                    return View(model);
+                }
+
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+            }
+            return View();
+        }
+
+        public async Task<IdentityResult> ChangePasswordAsync(ChangePasswordModel model)
+        {
+            var userId = currentUserId();
+            var user = await userManager.FindByIdAsync(userId);
+            return await userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
+        }
 
 
     }
 
-   
+
 }

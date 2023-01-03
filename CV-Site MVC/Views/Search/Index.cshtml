@@ -1,0 +1,68 @@
+﻿@model IEnumerable<CV_Site_MVC.Models.CV>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div style="font-family:Arial">
+    <h2>Employee List</h2>
+    <p>
+        @using (@Html.BeginForm("Index", "Search", FormMethod.Get))
+        {
+            <b>Search By:</b>
+    @*        @Html.RadioButton("searchBy", "UserName", true) <text>Name</text>
+           @Html.RadioButton("searchBy", "Gender") <text>Gender</text>*@
+
+            <br />
+            @Html.TextBox("search") <input type="submit" value="search" />
+        }
+    </p>
+    <table border="1">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>Action</th>
+        </tr>
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td colspan="4">
+                    No records match search criteria
+                </td>
+            </tr>
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td><a asp-controller="CV" asp-action="CV" asp-route-id="@item.UserID">Till CV</a></td>
+                   
+                </tr>
+            }
+        }
+    </table>
+</div>
+
+
