@@ -2,6 +2,8 @@
 
 <h1>@Model.Name</h1>
 
+<div asp-validation-summary="All" class="text-danger"></div>
+
 <form asp-controller="CV" asp-action="EditEducation" method="post">
 	<label>Utbildning </label>
 	<input asp-for="Name" type="text"/><br />

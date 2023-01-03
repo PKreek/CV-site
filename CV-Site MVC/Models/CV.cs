@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 
@@ -10,10 +11,22 @@ namespace CV_Site_MVC.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
-        public string Utbildning { get; set; }
+        [StringLength(100, ErrorMessage = "Max 100 tecken")]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress(ErrorMessage = "Ange en giltig email")]
         public string Email { get; set; }
+
+        [StringLength(100, ErrorMessage = "Max 100 tecken")]
+        [DataType(DataType.PhoneNumber)]
+        [Phone(ErrorMessage = "Ange ett giltigt telefonnummer")]
         public string Phone { get; set; }
+
+        [Required(ErrorMessage = "Ange förnamn")]
+        [StringLength(100, ErrorMessage = "Max 100 tecken")]
         public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "Ange efternamn")]
+        [StringLength(100, ErrorMessage = "Max 100 tecken")]
         public string LastName { get; set; }
 
         public string UserID { get; set; }

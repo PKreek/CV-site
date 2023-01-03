@@ -10,23 +10,22 @@
 }
 
 <div>
-	<a asp-controller="Account" asp-action="ChangePassword">Ändra din profil</a>
+	<a class="text-dark" asp-controller="Account" asp-action="ChangePassword">Ändra din profil</a>
 </div>
 <div>
-	<a asp-controller="CV" asp-action="CV" asp-route-id="@id">Gå till ditt CV</a>
+	<a class="text-dark" asp-controller="CV" asp-action="CV" asp-route-id="@id">Gå till ditt CV</a>
 </div>
 <div>
-	<a asp-controller="Project" asp-action="Project">Starta ett projekt</a>
+	<a class="text-dark" asp-controller="Project" asp-action="Project">Starta ett projekt</a>
 </div>
 <div>
 	
-	<h5>Projekt du skapat</h5>
 	@if (Model.ProjectList.Count() > 0)
 	{
+		<h5>Projekt du skapat</h5>
 		<table class="table-bordered">
 			<thead>
-				<tr>
-					<td>Id</td>
+				<tr class="font-weight-bold">
 					<td>Projektnamn</td>
 					<td>Beskrivning</td>
 					<td>Startdatum</td>
@@ -40,7 +39,6 @@
 				@foreach (var project in Model.ProjectList)
 				{
 					<tr>
-						<td>@project.Id</td>
 						<td>@project.ProjectName</td>
 						<td>@project.Description</td>
 						<td>@project.StartDate</td>
@@ -58,6 +56,43 @@
 					</tr>
 				}
 			</tbody>
+		</table>
+	}
+</div>
+<div>
+	@if (Model.ProjectsInvolved.Count() > 0)
+	{
+		<h5>Projekt du är med i</h5>
+		<table class="table-bordered">
+			<thead>
+				<tr class="font-weight-bold">
+					<td>Projektnamn</td>
+					<td>Beskrivning</td>
+					<td>Startdatum</td>
+					<td>Slutdatum</td>
+					<td>Projektledare</td>
+					<td>Personer i projekt</td>
+				</tr>
+			</thead>
+		
+		<tbody>
+				@foreach (var project in Model.ProjectsInvolved)
+				{
+					<tr>
+						<td>@project.project.ProjectName</td>
+						<td>@project.project.Description</td>
+						<td>@project.project.StartDate</td>
+						<td>@project.project.EndDate</td>
+						<td>@project.project.User.UserName</td>
+						<td>
+							@foreach (var users in Model.UserInProjects.Where(x => x.ProjektID == project.project.Id))
+							{
+								@users.User.UserName
+							}
+						</td>
+					</tr>
+				}
+		</tbody>
 		</table>
 	}
 </div>

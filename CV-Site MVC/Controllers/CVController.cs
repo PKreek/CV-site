@@ -67,12 +67,19 @@ namespace CV_Site_MVC.Controllers
         [HttpPost]
         public IActionResult Edit(CV cv)
         {
-            cv.UserID = currentUserId();
-            cv.PhotoPath = _dbContext.cVs.Where(x => x.UserID.Equals(currentUserId())).Select(y => y.PhotoPath).First();
-            _dbContext.cVs.Update(cv);
-            _dbContext.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                cv.UserID = currentUserId();
+                cv.PhotoPath = _dbContext.cVs.Where(x => x.UserID.Equals(currentUserId())).Select(y => y.PhotoPath).First();
+                _dbContext.cVs.Update(cv);
+                _dbContext.SaveChanges();
 
-            return RedirectToAction("CV", new { id = currentUserId() });
+                return RedirectToAction("CV", new { id = currentUserId() });
+            }
+            else
+            {
+                return View(cv);
+            }
         }
 
         [HttpGet]
@@ -96,13 +103,17 @@ namespace CV_Site_MVC.Controllers
         [HttpPost]
         public IActionResult EditWork(Work work)
         {
-            _dbContext.Works.Update(work);
-            _dbContext.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                _dbContext.Works.Update(work);
+                _dbContext.SaveChanges();
 
-            //_dbContext.cVs.Where(c => _dbContext.Work_CVs
-            //    .Where(wc => wc.CVID.)
-
-            return RedirectToAction("Work");
+                return RedirectToAction("Work", new { id = cvIdCurrentUser() });
+            }
+            else
+            {
+                return View(work);
+            }
         }
 
         [HttpGet]
@@ -127,7 +138,7 @@ namespace CV_Site_MVC.Controllers
 
                 _dbContext.SaveChanges();
 
-                return RedirectToAction("Work");
+                return RedirectToAction("Work", new { id = cvIdCurrentUser() });
             }
             else
             {
@@ -143,7 +154,7 @@ namespace CV_Site_MVC.Controllers
             _dbContext.Works.Remove(work);
             _dbContext.SaveChanges();
 
-            return RedirectToAction("Work");
+            return RedirectToAction("Work", new { id = cvIdCurrentUser() });
         }
 
         [HttpGet]
@@ -165,12 +176,19 @@ namespace CV_Site_MVC.Controllers
         [HttpPost]
         public IActionResult EditSkill(Skill skill)
         {
-            skill.CVId = _dbContext.cVs.Where(c => c.UserID.Equals(currentUserId()))
+            if (ModelState.IsValid)
+            {
+                skill.CVId = _dbContext.cVs.Where(c => c.UserID.Equals(currentUserId()))
                     .Select(i => i.ID).First();
-            _dbContext.Skills.Update(skill);
-            _dbContext.SaveChanges();
+                _dbContext.Skills.Update(skill);
+                _dbContext.SaveChanges();
 
-            return RedirectToAction("Skill");
+                return RedirectToAction("Skill", new { id = cvIdCurrentUser() });
+            }
+            else
+            {
+                return View(skill);
+            }
         }
 
         [HttpGet]
@@ -189,7 +207,7 @@ namespace CV_Site_MVC.Controllers
                 _dbContext.Skills.Add(skill);
                 _dbContext.SaveChanges();
 
-                return RedirectToAction("Skill");
+                return RedirectToAction("Skill", new { id = cvIdCurrentUser() });
             }
             else
             {
@@ -203,7 +221,7 @@ namespace CV_Site_MVC.Controllers
             _dbContext.Skills.Remove(skill);
             _dbContext.SaveChanges();
 
-            return RedirectToAction("Skill");
+            return RedirectToAction("Skill", new { id = cvIdCurrentUser() });
         }
 
         [HttpGet]
@@ -225,12 +243,19 @@ namespace CV_Site_MVC.Controllers
         [HttpPost]
         public IActionResult EditEducation(Education education)
         {
-            education.CVId = _dbContext.cVs.Where(c => c.UserID.Equals(currentUserId()))
+            if (ModelState.IsValid)
+            {
+                education.CVId = _dbContext.cVs.Where(c => c.UserID.Equals(currentUserId()))
                     .Select(i => i.ID).First();
-            _dbContext.Educations.Update(education);
-            _dbContext.SaveChanges();
+                _dbContext.Educations.Update(education);
+                _dbContext.SaveChanges();
 
-            return RedirectToAction("education");
+            return RedirectToAction("education", new { id = cvIdCurrentUser() });
+            }
+            else
+            {
+                return View(education);
+            }
         }
 
         [HttpGet]
@@ -249,7 +274,7 @@ namespace CV_Site_MVC.Controllers
                 _dbContext.Educations.Add(education);
                 _dbContext.SaveChanges();
 
-                return RedirectToAction("Education");
+                return RedirectToAction("Education", new { id = cvIdCurrentUser() });
             }
             else
             {
@@ -263,7 +288,7 @@ namespace CV_Site_MVC.Controllers
             _dbContext.Educations.Remove(education);
             _dbContext.SaveChanges();
 
-            return RedirectToAction("Education");
+            return RedirectToAction("Education", new { id = cvIdCurrentUser() });
         }
 
         [HttpGet]
@@ -311,6 +336,12 @@ namespace CV_Site_MVC.Controllers
         {
             ClaimsPrincipal currentUser = this.User;
             return currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+        }
+
+        private int cvIdCurrentUser()
+        {
+            return _dbContext.cVs.Where(c => c.UserID.Equals(currentUserId()))
+                    .Select(i => i.ID).First();
         }
     }
 }

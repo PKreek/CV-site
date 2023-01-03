@@ -2,26 +2,45 @@
 @using CV_Site_MVC.Models
 @model IndexViewModel
 
-	<div>
-		<h3>CV</h3>
+<div>
+	<h3>CV</h3>
+	@if(Model.listOfCV != null)
+	{
 		<table class="table-bordered">
-	<thead>
-		<tr>
-			<td>Id</td>
-			<td>Utbildning</td>
-		</tr>
-	</thead>
-	<tbody>
-			@foreach (CV cV in Model.listOfCV)
-			{
-				<tr>
-					<td>@cV.ID</td>
-					<td>@cV.Utbildning</td>
-					<td><a asp-controller="CV" asp-action="CV" asp-route-id="@cV.UserID">Till CV</a></td>
+			<thead>
+				<tr class="font-weight-bold">
+					<td>Användare</td>
+					<td>Gå till CV</td>
+			
 				</tr>
-			}
-	</tbody>
-</table>
+			</thead>
+				<tbody>
+				@if(User.Identity.IsAuthenticated)
+			    {
+					@foreach (CV cV in Model.listOfCV)
+					{
+						<tr>
+						<td>@cV.User.UserName</td>
+						<td><a asp-controller="CV" asp-action="CV" asp-route-id="@cV.UserID">Till CV</a></td>
+						</tr>							
+					}
+			    }
+				else
+				{
+					
+					@foreach(var user in Model.PrivateCVUser)
+					{
+						<tr>
+						<td>@user.UserName</td>
+						<td><a asp-controller="CV" asp-action="CV" asp-route-id="user.UserID">Till CV</a></td>
+						</tr>
+					}
+					
+				}
+				
+				</tbody>
+		</table>
+	}
 	</div>
 <div>
 	<h3>Projekt</h3>
@@ -29,8 +48,7 @@
 	{
 		<table class="table-bordered">
 			<thead>
-				<tr>
-					<td>Id</td>
+				<tr class="font-weight-bold">
 					<td>Projektnamn</td>
 					<td>Beskrivning</td>
 					<td>Startdatum</td>
@@ -43,18 +61,29 @@
 			<tbody>
 
 				<tr>
-					<td>@Model.lastProject.Id</td>
 					<td>@Model.lastProject.ProjectName</td>
 					<td>@Model.lastProject.Description</td>
 					<td>@Model.lastProject.StartDate</td>
 					<td>@Model.lastProject.EndDate</td>
 					<td>@Model.lastProject.User.UserName</td>
-					<td>
-						@foreach (var users in Model.UserInProjects.Where(x => x.ProjektID == Model.lastProject.Id))
-						{
-							@users.User.UserName
-						}
-					</td>
+					@if (User.Identity.IsAuthenticated)
+					{
+						<td>
+							@foreach (var users in Model.UserInProjects.Where(x => x.ProjektID == Model.lastProject.Id))
+							{
+								@users.User.UserName
+							}
+						</td>
+					}
+					else
+					{
+						<td>
+							@foreach(var users in Model.UsersWithPrivateCV.Where(x => x.ProjektID == Model.lastProject.Id))
+							{
+								@users.User.UserName
+							}
+						</td>
+					}
 					<td>
 						@if (User.Identity.IsAuthenticated)
 						{
