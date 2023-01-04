@@ -12,22 +12,23 @@
 			</div>
 		</div>
 	</div>
-</div>
 
 
-<div>
-	<a class="text-dark" asp-controller="Account" asp-action="ChangePassword">Ändra ditt lösenord</a>
+
+	<div>
+		<a class="text-dark" asp-controller="Account" asp-action="ChangePassword">Ändra ditt lösenord</a>
+	</div>
+	<div>
+		<a class="text-dark" asp-controller="CV" asp-action="CV" asp-route-id="@id">Gå till ditt CV</a>
+	</div>
+	<div>
+		<a class="text-dark" asp-controller="Project" asp-action="Project">Starta ett projekt</a>
+	</div>
 </div>
-<div>
-	<a class="text-dark" asp-controller="CV" asp-action="CV" asp-route-id="@id">Gå till ditt CV</a>
-</div>
-<div>
-	<a class="text-dark" asp-controller="Project" asp-action="Project">Starta ett projekt</a>
-</div>
-<div>
-	
+<hr>	
 <br>
 <br>
+<div>
 	@if (Model.ProjectList.Count() > 0)
 	{
 	<div class="row">
