@@ -36,6 +36,7 @@
 								@foreach (var users in Model.UserInProjects.Where(x => x.ProjektID == project.Id))
 								{
 									@users.User.UserName
+									<br>
 								}
 							</td>
 							}
@@ -45,6 +46,7 @@
 								@foreach (var users in Model.UsersWithPrivateCV.Where(x => x.ProjektID == project.Id))
 								{
 									@users.User.UserName
+									<br>
 								}
 							</td>
 							}

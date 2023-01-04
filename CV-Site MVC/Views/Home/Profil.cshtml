@@ -26,9 +26,15 @@
 </div>
 <div>
 	
+<br>
+<br>
 	@if (Model.ProjectList.Count() > 0)
 	{
-		<h5>Projekt du skapat</h5>
+	<div class="row">
+		<div class="mx-auto">
+		<h3>Projekt du skapat</h3>
+		</div>
+	</div>
 		<table class="table-bordered">
 			<thead>
 				<tr class="font-weight-bold">
@@ -54,6 +60,7 @@
 							@foreach (var users in Model.UserInProjects.Where(x => x.ProjektID == project.Id))
 							{
 								@users.User.UserName
+								<br>
 							}
 						</td>
 						<td>
@@ -66,10 +73,16 @@
 	}
 </div>
 
+<br>
+<br>
 <div>
 	@if (Model.ProjectsInvolved.Count() > 0)
 	{
-		<h5>Projekt du är med i</h5>
+		<div class="row">
+			<div class="mx-auto">
+				<h3>Projekt du är med i</h3>
+			</div>
+		</div>
 		<table class="table-bordered">
 			<thead>
 				<tr class="font-weight-bold">
@@ -95,6 +108,7 @@
 							@foreach (var users in Model.UserInProjects.Where(x => x.ProjektID == project.project.Id))
 							{
 								@users.User.UserName
+								<br>
 							}
 						</td>
 					</tr>
