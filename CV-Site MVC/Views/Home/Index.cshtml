@@ -4,20 +4,20 @@
 
 <div>
 	<h3>CV</h3>
-	@if(Model.listOfCV != null)
+	@if(Model.listOfCV.Count() > 0)
 	{
 		<table class="table-bordered">
 			<thead>
 				<tr class="font-weight-bold">
 					<td>Användare</td>
-					<td>Gå till CV</td>
-			
+					<td>Gå till CV</td>		
 				</tr>
 			</thead>
 				<tbody>
 				@if(User.Identity.IsAuthenticated)
 			    {
-					@foreach (CV cV in Model.listOfCV)
+					var ran = new Random();
+					@foreach (CV cV in Model.listOfCV.OrderBy(x => ran.Next()).Take(3))
 					{
 						<tr>
 						<td>@cV.User.UserName</td>
@@ -27,12 +27,12 @@
 			    }
 				else
 				{
-					
-					@foreach(var user in Model.PrivateCVUser)
+					var ran = new Random();
+					@foreach(var user in Model.PrivateCVUser.OrderBy(x => ran.Next()).Take(3))
 					{
 						<tr>
 						<td>@user.UserName</td>
-						<td><a asp-controller="CV" asp-action="CV" asp-route-id="user.UserID">Till CV</a></td>
+						<td><a asp-controller="CV" asp-action="CV" asp-route-id="@user.Id">Till CV</a></td>
 						</tr>
 					}
 					
