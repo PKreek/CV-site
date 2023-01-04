@@ -1,13 +1,19 @@
 ﻿@using System.Security.Claims
 @model ProfileViewModel
-
-
-<h1>Välkommen @User.Identity.Name</h1>
-
 @{
 	ClaimsPrincipal currentUser = this.User;
 	string id = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
 }
+<div class="container">
+	<div class="row">
+		<div class="col-md-8 offset-md-3">
+			<div class="align-content-md-center">
+			<h1>Välkommen @User.Identity.Name</h1>
+			</div>
+		</div>
+	</div>
+</div>
+
 
 <div>
 	<a class="text-dark" asp-controller="Account" asp-action="ChangePassword">Ändra ditt lösenord</a>
@@ -59,6 +65,7 @@
 		</table>
 	}
 </div>
+
 <div>
 	@if (Model.ProjectsInvolved.Count() > 0)
 	{
