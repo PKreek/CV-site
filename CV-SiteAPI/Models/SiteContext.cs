@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace CV_SiteAPI.Models
 {
-    public class SiteContext:IdentityDbContext<IdentityUser>
+    public class SiteContext:DbContext
     {
         public SiteContext(DbContextOptions<SiteContext> options):base(options)
         {
