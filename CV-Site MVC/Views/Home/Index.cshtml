@@ -59,78 +59,64 @@
 	}
 </div>
 
-<div>
-	<h3>Projekt</h3>
-	@if (Model.lastProject != null)
-	{
-		<table class="table-bordered">
-			<thead>
-				<tr class="font-weight-bold">
-					<td>Projektnamn</td>
-					<td>Beskrivning</td>
-					<td>Startdatum</td>
-					<td>Slutdatum</td>
-					<td>Projektledare</td>
-					<td>Personer med i projektet</td>
+<div class="container">
+@if (Model.lastProject != null)
+{
+		<div class="row pb-4">
+			<div class="col-lg-8">
+				<h3>Projekt</h3>
+			</div>
+		</div>
 
-				</tr>
-			</thead>
-			<tbody>
-
-				<tr>
-					<td>@Model.lastProject.ProjectName</td>
-					<td>@Model.lastProject.Description</td>
-					<td>@Model.lastProject.StartDate</td>
-					<td>@Model.lastProject.EndDate</td>
-					<td>@Model.lastProject.User.UserName</td>
+		<div class="row">	
+			<div class="col-md-6 offset-md-2">
+				<div class="p-4 bg-light rounded shadow p-3 mb-5 bg-white rounded">
+					<h2>@Model.lastProject.ProjectName</h2>
+					<p>Beskrivning:<br></p> @Model.lastProject.Description
+					<p>Startdatum:<br> @Model.lastProject.StartDate</p>
+					<p>Slutdatum:<br> @Model.lastProject.EndDate</p>
+					<p>Projektledare:<br> @Model.lastProject.User.UserName</p>
 					@if (User.Identity.IsAuthenticated)
 					{
-						<td>
+						<p>Användare med i projektet:<br>
 							@foreach (var users in Model.UserInProjects.Where(x => x.ProjektID == Model.lastProject.Id))
 							{
 								@users.User.UserName
+							<br>
 							}
-						</td>
+						</p>
+
 					}
 					else
 					{
-						<td>
-							@foreach(var users in Model.UsersWithPrivateCV.Where(x => x.ProjektID == Model.lastProject.Id))
-							{
-								@users.User.UserName
-							}
-						</td>
-					}
-					<td>
-						@if (User.Identity.IsAuthenticated)
+						<p>Användare med i projektet:<br>
+						@foreach (var users in Model.UsersWithPrivateCV.Where(x => x.ProjektID == Model.lastProject.Id))
 						{
-							@if (Model.UserInProjects.Where(x => x.User.UserName.Equals(User.Identity.Name) && x.ProjektID == Model.lastProject.Id).FirstOrDefault() == null)
-							{
-								<td>
-									<form method="post" asp-controller="Home" asp-action="JoinProject" asp-route-projId="@Model.lastProject.Id">
-										<button type="submit">Gå med</button>
-									</form>
-								</td>
-							}
-							else
-							{
-								<td>
-									<form method="post" asp-controller="Home" asp-action="RemoveProject" asp-route-projId="@Model.lastProject.Id">
-										<button type="submit">Gå ur</button>
-									</form>
-								</td>
-							}
+							@users.User.UserName
+							<br>
 						}
-					</td>
-				</tr>
-
-			</tbody>
-		</table>
-	}
+						</p>
+					}
+					@if (User.Identity.IsAuthenticated)
+					{
+						@if (Model.UserInProjects.Where(x => x.User.UserName.Equals(User.Identity.Name) && x.ProjektID == Model.lastProject.Id).FirstOrDefault() == null)
+						{
+								<form method="post" asp-controller="Home" asp-action="JoinProject" asp-route-projId="@Model.lastProject.Id">
+									<button type="submit">Gå med</button>
+								</form>
+						}
+						else
+						{
+								<form method="post" asp-controller="Home" asp-action="RemoveProject" asp-route-projId="@Model.lastProject.Id">
+									<button type="submit">Gå ur</button>
+								</form>
+						}
+					}
+				</div>
+			</div>
+		</div>
+}
 </div>
-
-
-
 
 @*@{
 	ViewData["Title"] = "Home Page";
