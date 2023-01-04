@@ -15,7 +15,7 @@ namespace CV_SiteAPI.Models
 
 
         public DbSet<Project> Projects { get; set; }
-        public DbSet<IdentityUser> Users { get; set; }
+        public DbSet<IdentityUser> AspNetUsers { get; set; }
         public DbSet<Work> Works { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Work_CV> Work_CVs { get; set; }
