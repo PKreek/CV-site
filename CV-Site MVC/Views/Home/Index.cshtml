@@ -19,7 +19,7 @@
 					@{var ran = new Random();}
 					@foreach (CV cV in Model.listOfCV.OrderBy(x => ran.Next()).Take(3))
 					{
-						<div class="col-md-3">
+						<div class="col-md-3 mx-auto">
 						<div class="CV p-4 bg-light rounded shadow p-3 mb-5 bg-white rounded">
 							<h4>CV</h4>
 							<h6 class="text-dark font-weight-bold">Användarnamn:</h6>
@@ -45,7 +45,7 @@
 				}
 				@foreach (var user in Model.PrivateCVUser.OrderBy(x => ran.Next()).Take(3))
 				{
-					<div class="col-md-3">
+					<div class="col-md-3 mx-auto">
 						<div class="CV p-4 bg-light rounded shadow p-3 mb-5 bg-white rounded">
 							<h4>CV</h4>
 							<h6 class="text-dark font-weight-bold">Användarnamn:</h6>
@@ -69,7 +69,7 @@
 		</div>
 
 		<div class="row">	
-			<div class="col-md-6 offset-md-2">
+			<div class="col-md-6 mx-auto">
 				<div class="p-4 bg-light rounded shadow p-3 mb-5 bg-white rounded">
 					<h2>@Model.lastProject.ProjectName</h2>
 					<p><span class="font-weight-bolder">Beskrivning:</span><br> @Model.lastProject.Description</p>
