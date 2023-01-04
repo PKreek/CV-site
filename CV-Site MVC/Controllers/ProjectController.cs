@@ -27,10 +27,14 @@ namespace CV_Site_MVC.Controllers
         [HttpPost]
         public IActionResult Project(Project projectObject)
         {
-            projectObject.UserId = currentUserId();
-            _dbContext.Projects.Add(projectObject);
-            _dbContext.SaveChanges();
-            return RedirectToAction("Profil","Home");
+            if (ModelState.IsValid)
+            {
+                projectObject.UserId = currentUserId();
+                _dbContext.Projects.Add(projectObject);
+                _dbContext.SaveChanges();
+                return RedirectToAction("Profil", "Home");
+            }
+            return View(projectObject);
         }
 
         public IActionResult ListOfProjects()
@@ -80,10 +84,14 @@ namespace CV_Site_MVC.Controllers
         [HttpPost]
         public IActionResult UpdateProject(Project project)
         {
-            project.UserId = currentUserId();
-            _dbContext.Projects.Update(project);
-            _dbContext.SaveChanges();
-            return RedirectToAction("Profil", "Home");
+            if (ModelState.IsValid)
+            {
+                project.UserId = currentUserId();
+                _dbContext.Projects.Update(project);
+                _dbContext.SaveChanges();
+                return RedirectToAction("Profil", "Home");
+            }
+            return View(project);
         }
         private string currentUserId()
         {
