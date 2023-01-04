@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace CV_Site_MVC
@@ -33,6 +34,14 @@ namespace CV_Site_MVC
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<SiteContext>()
                 .AddDefaultTokenProviders();
+
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            //clientHandler.ServerCertificateCustomValidationCallback = ()
+
+            HttpClient client = new HttpClient(clientHandler);
+            client.BaseAddress = new Uri("https://localhost:13756/api/");
+
+            services.AddSingleton<HttpClient>(client);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
