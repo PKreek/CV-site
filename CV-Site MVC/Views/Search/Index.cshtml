@@ -10,7 +10,7 @@
     <p>
         @using (@Html.BeginForm("Index", "Search", FormMethod.Get))
         {
-            <b>Sök:</b>
+            <b>Sök på förnamn:</b>
     @*        @Html.RadioButton("searchBy", "UserName", true) <text>Name</text>
            @Html.RadioButton("searchBy", "Gender") <text>Gender</text>*@
 
@@ -55,8 +55,8 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Phone)
                     </td>
-                    <td><a asp-controller="CV" asp-action="CV" asp-route-id="@item.UserID">Till CV</a></td>
-                   
+                    <td>
+                        <a asp-controller="CV" asp-action="CV" asp-route-id="@item.UserID">Till CV</a></td>                
                     </tr>
                 }
             }
@@ -78,9 +78,13 @@
                             @Html.DisplayFor(modelItem => item.Phone)
                         </td>
                         <td>        
-                            @if(item.ID.Equals(Model.PrivateCvList.Select(x => x.ID)))
+                            @if(item.PrivateCV == false)
                             {
                                 <a asp-controller="CV" asp-action="CV" asp-route-id="@item.UserID">Till CV</a>
+                            }
+                            else
+                            {
+                                 <p>Privat</p>
                             }
                         </td>
 

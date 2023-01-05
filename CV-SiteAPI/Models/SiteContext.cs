@@ -14,16 +14,16 @@ namespace CV_SiteAPI.Models
         }
 
 
-        public DbSet<Project> Projects { get; set; }
-        public DbSet<IdentityUser> AspNetUsers { get; set; }
-        public DbSet<Work> Works { get; set; }
-        public DbSet<Message> Messages { get; set; }
-        public DbSet<Work_CV> Work_CVs { get; set; }
-        public DbSet<Project_User> Project_Users { get; set; }
-        public DbSet<CV> cVs { get; set; }
-        public DbSet<Skill> Skills { get; set; }
-        public DbSet<Education> Educations { get; set; }
+        //public DbSet<Project> Projects { get; set; }
+        //public DbSet<IdentityUser> AspNetUsers { get; set; }
+        //public DbSet<Work> Works { get; set; }
+        //public DbSet<Work_CV> Work_CVs { get; set; }
+        //public DbSet<Project_User> Project_Users { get; set; }
+        //public DbSet<CV> cVs { get; set; }
+        //public DbSet<Skill> Skills { get; set; }
+        //public DbSet<Education> Educations { get; set; }
 
+        public DbSet<Message> Messages { get; set; }
         //Tillåter oss att ändra vart vi ska hämta data ifrån. 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -39,23 +39,23 @@ namespace CV_SiteAPI.Models
             }
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Project_User>().HasKey(pu => new { pu.UserID, pu.ProjektID });
+        //    modelBuilder.Entity<Project_User>().HasKey(pu => new { pu.UserID, pu.ProjektID });
 
-            modelBuilder.Entity<Work_CV>().HasKey(wc => new { wc.WorkID, wc.CVID });
+        //    modelBuilder.Entity<Work_CV>().HasKey(wc => new { wc.WorkID, wc.CVID });
             
-            modelBuilder.Entity<Work_CV>()
-                .HasOne(w => w.Work)
-                .WithMany(wc => wc.Work_CV)
-                .HasForeignKey(wi => wi.WorkID);
+        //    modelBuilder.Entity<Work_CV>()
+        //        .HasOne(w => w.Work)
+        //        .WithMany(wc => wc.Work_CV)
+        //        .HasForeignKey(wi => wi.WorkID);
 
-            modelBuilder.Entity<Work_CV>()
-                .HasOne(c => c.Cv)
-                .WithMany(wc => wc.Work_CV)
-                .HasForeignKey(ci => ci.CVID);
+        //    modelBuilder.Entity<Work_CV>()
+        //        .HasOne(c => c.Cv)
+        //        .WithMany(wc => wc.Work_CV)
+        //        .HasForeignKey(ci => ci.CVID);
 
 
 
@@ -89,5 +89,5 @@ namespace CV_SiteAPI.Models
             //   }
             //   );
         }
-    }
+    
 }

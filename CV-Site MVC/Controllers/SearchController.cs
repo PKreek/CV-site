@@ -19,7 +19,6 @@ namespace CV_Site_MVC.Controllers
         {
                 SearchViewModel model = new SearchViewModel();
                 model.ListOfCv = _dbContext.cVs.Where(x => x.FirstName.StartsWith(search) || search == null).ToList();
-                model.PrivateCvList = _dbContext.cVs.Where(x => x.PrivateCV == false).ToList();
                 return View(model);
                 //return View(_dbContext.cVs.Where(x => x.FirstName.StartsWith(search) || search == null).ToList());
             
