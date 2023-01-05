@@ -12,6 +12,8 @@ namespace CV_Site_MVC.Models
         public string SentTo { get; set; }
         public string SentFrom { get; set; }
 
+        public bool Read { get; set; }
+
         [ForeignKey(nameof(SentTo))]
         public virtual User Message_Reciever  { get; set; }
 
