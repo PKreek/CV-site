@@ -17,8 +17,11 @@ namespace CV_Site_MVC.Controllers
         // GET: SearchController
         public ActionResult Index(string search)
         {
-            
-                return View(_dbContext.cVs.Where(x => x.FirstName.StartsWith(search) || search == null).ToList());
+                SearchViewModel model = new SearchViewModel();
+                model.ListOfCv = _dbContext.cVs.Where(x => x.FirstName.StartsWith(search) || search == null).ToList();
+                model.PrivateCvList = _dbContext.cVs.Where(x => x.PrivateCV == false).ToList();
+                return View(model);
+                //return View(_dbContext.cVs.Where(x => x.FirstName.StartsWith(search) || search == null).ToList());
             
         }
 

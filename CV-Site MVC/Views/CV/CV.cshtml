@@ -29,6 +29,10 @@
 	<a asp-controller="CV" asp-action="Image" asp-route-id="@Model.Cv.ID">Ladda upp foto</a>
 }
 
+@if(!Model.IsMyCv)
+{
+	<a asp-controller="MessageController" asp-action="">Skicka meddelande</a>
+}
 <h2>Personuppgifter</h2>
 
 <div>
