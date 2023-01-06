@@ -5,6 +5,5 @@ namespace CV_Site_MVC.Models
     public class SearchViewModel
     {
         public List<CV> ListOfCv { get; set; }
-
     }
 }

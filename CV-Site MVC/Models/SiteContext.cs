@@ -41,38 +41,6 @@ namespace CV_Site_MVC.Models
                 .HasOne(c => c.Cv)
                 .WithMany(wc => wc.Work_CV)
                 .HasForeignKey(ci => ci.CVID);
-
-
-
-
-            //modelBuilder.Entity<Project>().HasData(
-            //    new Project
-            //    {
-            //        Id = 1,
-            //        ProjectName = "MIB",
-            //        Description = "Rymdvarelser och så",
-            //        StartDate = new System.DateTime(2022 / 12 / 16)
-            //    }
-            //    );
-
-            //modelBuilder.Entity<IdentityUser>().HasData(
-            //    new IdentityUser
-            //    {
-            //        Id = "1",
-            //        UserName = "Patte1337"
-
-            //    //    Description = "Rymdvarelser och så",
-            //    //    StartDate = new System.DateTime(2022 / 12 / 16)
-            //    }
-            //    );
-
-            //modelBuilder.Entity<CV>().HasData(
-            //    new CV
-            //   {
-            //       ID = 2,
-            //       Utbildning = "Ekonomi"
-            //   }
-            //   );
         }
     }
 }
