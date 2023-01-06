@@ -86,8 +86,16 @@ namespace CV_Site_MVC.Controllers
         public IActionResult NewMessage(string id)
         {
             Message message = new Message();
-            message.SentFrom = _dbContext.Users.Where(x => x.Id.Equals(currentUserId())).Select(y => y.UserName).First();
-           
+
+            if (User.Identity.IsAuthenticated)
+            {
+                message.SentFrom = _dbContext.Users.Where(x => x.Id.Equals(currentUserId())).Select(y => y.UserName).First();
+            }
+            else
+            {
+                message.SentFrom = "Avsändare";
+            }
+
             message.SentTo = id;
 
             return View(message);

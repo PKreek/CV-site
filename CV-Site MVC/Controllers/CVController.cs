@@ -25,9 +25,13 @@ namespace CV_Site_MVC.Controllers
         [HttpGet]
         public IActionResult CV(string id)
         {
-            var countID = currentUserId();
-            var antal = _dbContext.Messages.Where(x => x.SentTo == countID).Count(l => l.Read == false);
-            ViewData["AntalMeddelande"] = antal;
+            if (User.Identity.IsAuthenticated)
+            {
+                var countID = currentUserId();
+                var antal = _dbContext.Messages.Where(x => x.SentTo == countID).Count(l => l.Read == false);
+                ViewData["AntalMeddelande"] = antal;
+            }
+
             CvViewModel model = new CvViewModel();
 
             model.UserID = id;
