@@ -1,6 +1,7 @@
-﻿@model List<Education>
+﻿@using System.Security.Claims
+@model List<Education>
 
-<h1>Arbeten</h1>
+<h1>Utbildningar</h1>
 <div>
 	<table class="table-bordered">
 		<thead>
@@ -29,3 +30,12 @@
 	</table>
 </div>
 <a asp-controller="CV" asp-action="AddEducation">Lägg till</a>
+<br />
+
+
+@{
+	ClaimsPrincipal currentUser = this.User;
+	var userId = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+}
+<br />
+<a asp-controller="CV" asp-action="CV" asp-route-id="@userId">Tillbaka</a>
