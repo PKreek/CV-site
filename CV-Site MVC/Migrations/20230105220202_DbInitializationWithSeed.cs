@@ -55,10 +55,10 @@ namespace CV_Site_MVC.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Role = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Role = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -177,8 +177,13 @@ namespace CV_Site_MVC.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Utbildning = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserID = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Phone = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    FirstName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    UserID = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    PhotoPath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PrivateCV = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -200,7 +205,8 @@ namespace CV_Site_MVC.Migrations
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     SentTo = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    SentFrom = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    SentFrom = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Read = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -225,8 +231,8 @@ namespace CV_Site_MVC.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProjectName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProjectName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
@@ -243,7 +249,47 @@ namespace CV_Site_MVC.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Work_CV",
+                name: "Educations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    CVId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Educations", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Educations_cVs_CVId",
+                        column: x => x.CVId,
+                        principalTable: "cVs",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Skills",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    CVId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Skills", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Skills_cVs_CVId",
+                        column: x => x.CVId,
+                        principalTable: "cVs",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Work_CVs",
                 columns: table => new
                 {
                     WorkID = table.Column<int>(type: "int", nullable: false),
@@ -251,15 +297,15 @@ namespace CV_Site_MVC.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Work_CV", x => new { x.WorkID, x.CVID });
+                    table.PrimaryKey("PK_Work_CVs", x => new { x.WorkID, x.CVID });
                     table.ForeignKey(
-                        name: "FK_Work_CV_cVs_CVID",
+                        name: "FK_Work_CVs_cVs_CVID",
                         column: x => x.CVID,
                         principalTable: "cVs",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Work_CV_Works_WorkID",
+                        name: "FK_Work_CVs_Works_WorkID",
                         column: x => x.WorkID,
                         principalTable: "Works",
                         principalColumn: "Id",
@@ -267,7 +313,7 @@ namespace CV_Site_MVC.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Project_User",
+                name: "Project_Users",
                 columns: table => new
                 {
                     UserID = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -275,35 +321,20 @@ namespace CV_Site_MVC.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Project_User", x => new { x.UserID, x.ProjektID });
+                    table.PrimaryKey("PK_Project_Users", x => new { x.UserID, x.ProjektID });
                     table.ForeignKey(
-                        name: "FK_Project_User_AspNetUsers_UserID",
+                        name: "FK_Project_Users_AspNetUsers_UserID",
                         column: x => x.UserID,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Project_User_Projects_ProjektID",
+                        name: "FK_Project_Users_Projects_ProjektID",
                         column: x => x.ProjektID,
                         principalTable: "Projects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.InsertData(
-                table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "1", 0, "fe704781-7da0-4006-ae2a-addc6740c5f4", "IdentityUser", null, false, false, null, null, null, null, null, false, "6b2cd182-6c63-43df-80f3-0363550d4c19", false, "Patte1337" });
-
-            migrationBuilder.InsertData(
-                table: "Projects",
-                columns: new[] { "Id", "Description", "EndDate", "ProjectName", "StartDate", "UserId" },
-                values: new object[] { 1, "Rymdvarelser och så", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "MIB", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(10), null });
-
-            migrationBuilder.InsertData(
-                table: "cVs",
-                columns: new[] { "ID", "UserID", "Utbildning" },
-                values: new object[] { 2, null, "Ekonomi" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -350,6 +381,11 @@ namespace CV_Site_MVC.Migrations
                 column: "UserID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Educations_CVId",
+                table: "Educations",
+                column: "CVId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Messages_SentFrom",
                 table: "Messages",
                 column: "SentFrom");
@@ -360,8 +396,8 @@ namespace CV_Site_MVC.Migrations
                 column: "SentTo");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Project_User_ProjektID",
-                table: "Project_User",
+                name: "IX_Project_Users_ProjektID",
+                table: "Project_Users",
                 column: "ProjektID");
 
             migrationBuilder.CreateIndex(
@@ -370,8 +406,13 @@ namespace CV_Site_MVC.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Work_CV_CVID",
-                table: "Work_CV",
+                name: "IX_Skills_CVId",
+                table: "Skills",
+                column: "CVId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Work_CVs_CVID",
+                table: "Work_CVs",
                 column: "CVID");
         }
 
@@ -393,13 +434,19 @@ namespace CV_Site_MVC.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Educations");
+
+            migrationBuilder.DropTable(
                 name: "Messages");
 
             migrationBuilder.DropTable(
-                name: "Project_User");
+                name: "Project_Users");
 
             migrationBuilder.DropTable(
-                name: "Work_CV");
+                name: "Skills");
+
+            migrationBuilder.DropTable(
+                name: "Work_CVs");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

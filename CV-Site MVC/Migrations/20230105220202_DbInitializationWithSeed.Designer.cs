@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CV_Site_MVC.Migrations
 {
     [DbContext(typeof(SiteContext))]
-    [Migration("20221229143945_DbInitializationWithSeed")]
+    [Migration("20230105220202_DbInitializationWithSeed")]
     partial class DbInitializationWithSeed
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,24 +28,60 @@ namespace CV_Site_MVC.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Email")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Phone")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("PhotoPath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PrivateCV")
+                        .HasColumnType("bit");
+
                     b.Property<string>("UserID")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Utbildning")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 
                     b.HasIndex("UserID");
 
                     b.ToTable("cVs");
+                });
 
-                    b.HasData(
-                        new
-                        {
-                            ID = 2,
-                            Utbildning = "Ekonomi"
-                        });
+            modelBuilder.Entity("CV_Site_MVC.Models.Education", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CVId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CVId");
+
+                    b.ToTable("Educations");
                 });
 
             modelBuilder.Entity("CV_Site_MVC.Models.Message", b =>
@@ -57,6 +93,9 @@ namespace CV_Site_MVC.Migrations
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("Read")
+                        .HasColumnType("bit");
 
                     b.Property<string>("SentFrom")
                         .HasColumnType("nvarchar(450)");
@@ -84,13 +123,16 @@ namespace CV_Site_MVC.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ProjectName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
@@ -103,16 +145,6 @@ namespace CV_Site_MVC.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Projects");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Rymdvarelser och så",
-                            EndDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProjectName = "MIB",
-                            StartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(10)
-                        });
                 });
 
             modelBuilder.Entity("CV_Site_MVC.Models.Project_User", b =>
@@ -127,7 +159,29 @@ namespace CV_Site_MVC.Migrations
 
                     b.HasIndex("ProjektID");
 
-                    b.ToTable("Project_User");
+                    b.ToTable("Project_Users");
+                });
+
+            modelBuilder.Entity("CV_Site_MVC.Models.Skill", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CVId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CVId");
+
+                    b.ToTable("Skills");
                 });
 
             modelBuilder.Entity("CV_Site_MVC.Models.Work", b =>
@@ -137,16 +191,21 @@ namespace CV_Site_MVC.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("EndDate")
+                    b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Role")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
-                    b.Property<DateTime>("StartDate")
+                    b.Property<DateTime?>("StartDate")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -166,7 +225,7 @@ namespace CV_Site_MVC.Migrations
 
                     b.HasIndex("CVID");
 
-                    b.ToTable("Work_CV");
+                    b.ToTable("Work_CVs");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -289,20 +348,6 @@ namespace CV_Site_MVC.Migrations
                     b.ToTable("AspNetUsers");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "1",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "fe704781-7da0-4006-ae2a-addc6740c5f4",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "6b2cd182-6c63-43df-80f3-0363550d4c19",
-                            TwoFactorEnabled = false,
-                            UserName = "Patte1337"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -407,6 +452,17 @@ namespace CV_Site_MVC.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("CV_Site_MVC.Models.Education", b =>
+                {
+                    b.HasOne("CV_Site_MVC.Models.CV", "Cv")
+                        .WithMany()
+                        .HasForeignKey("CVId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cv");
+                });
+
             modelBuilder.Entity("CV_Site_MVC.Models.Message", b =>
                 {
                     b.HasOne("CV_Site_MVC.Models.User", "Message_Sender")
@@ -448,6 +504,17 @@ namespace CV_Site_MVC.Migrations
                     b.Navigation("project");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("CV_Site_MVC.Models.Skill", b =>
+                {
+                    b.HasOne("CV_Site_MVC.Models.CV", "Cv")
+                        .WithMany()
+                        .HasForeignKey("CVId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cv");
                 });
 
             modelBuilder.Entity("CV_Site_MVC.Models.Work_CV", b =>
