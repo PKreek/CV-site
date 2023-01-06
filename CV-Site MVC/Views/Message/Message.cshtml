@@ -1,3 +1,45 @@
-﻿@model List<MessageViewModel>
+﻿@model List<Message>
 
-<h1>Meddelande</h1>
+<h2 class="text-center">Meddelanden</h2>
+
+<div class="text-center">
+    <div>
+        <table class="table">
+            <tr>
+                <th>Avsändare</th>
+                <th>Datum</th>
+                <th>Innehåll</th>
+                <th>Läst</th>
+            </tr>
+            @foreach(var item in Model)
+            {
+
+                <tr>
+                    <td>@item.SentTo</td>
+                    <td>@item.Date</td>
+                    <td>@item.Text</td>
+                    <td>
+                        @if(item.Read == false)
+                        {
+                            <form asp-controller="" asp-action="" asp-route-id="@item.Id">
+                                <button type="submit">Markera som läst</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <form asp-controller="" asp-action="" asp-route-id="@item.Id">
+                                <button type="submit">Markera som oläst</button>
+                            </form>
+                        }
+
+
+                    </td>
+                </tr>
+            }
+           
+        </table>
+
+
+    </div>
+
+</div>

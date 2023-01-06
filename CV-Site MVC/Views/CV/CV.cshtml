@@ -31,7 +31,7 @@
 
 @if(!Model.IsMyCv)
 {
-	<a asp-controller="Message" asp-action="Message">Skicka meddelande</a>
+	<a asp-controller="Message" asp-action="NewMessage" asp-route-id=@Model.CvUser.Id>Skicka meddelande</a>
 }
 <h2>Personuppgifter</h2>
 

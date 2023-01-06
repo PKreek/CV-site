@@ -37,40 +37,81 @@ namespace CV_Site_MVC.Controllers
                 PropertyNameCaseInsensitive = true
             };
 
-            List<Message> listofMessage = JsonSerializer.Deserialize<List<Message>>(data, options).Where(x => x.SentTo == id).ToList();
+            List<Message> listofMessage = JsonSerializer.Deserialize<List<Message>>(data, options);
 
-            List<MessageViewModel> list = new List<MessageViewModel>();
-            foreach(var message in listofMessage)
-            {
-                string sender = message.SentFrom;
-                string userNameSender = _dbContext.Users.Where(x => x.Id == sender).Select(x => x.UserName).FirstOrDefault();
-                string reciever = message.SentTo;
-                string userNameReciever = _dbContext.Users.Where(x => x.Id == reciever).Select(x => x.UserName).FirstOrDefault();
-                string text = message.Text;
-                bool read = message.Read;
-                int messageID = message.Id;
-
-
-                MessageViewModel model = new MessageViewModel();
-                model.Sender = userNameSender;
-                model.Reciever = userNameReciever;
-                model.Text = text;
-                model.Read = read;
-                model.ID = messageID;
-
-                list.Add(model);
-                list.Reverse();
-                   
-
-                
-
-            }
+            List<Message> messages = listofMessage.Where(x => x.SentTo == id).ToList();
+            messages.Reverse();
             ViewBag.Meddelande = "Meddelanden";
-            return View(list);
+            return View(messages);
+
+            //    List<Message> listofMessage = JsonSerializer.Deserialize<List<Message>>(data, options).Where(x => x.SentTo == id).ToList();
+
+            //    List<MessageViewModel> list = new List<MessageViewModel>();
+            //    foreach(var message in listofMessage)
+            //    {
+            //        string sender = message.SentFrom;
+            //        string userNameSender = _dbContext.Users.Where(x => x.Id == sender).Select(x => x.UserName).FirstOrDefault();
+            //        string reciever = message.SentTo;
+            //        string userNameReciever = _dbContext.Users.Where(x => x.Id == reciever).Select(x => x.UserName).FirstOrDefault();
+            //        string text = message.Text;
+            //        bool read = message.Read;
+            //        string date = message.Date.ToString();
+            //        int messageID = message.Id;
+
+
+            //        MessageViewModel model = new MessageViewModel();
+            //        model.Sender = userNameSender;
+            //        model.Reciever = userNameReciever;
+            //        model.Text = text;
+            //        model.Read = read;
+            //        model.Date = date;
+            //        model.ID = messageID;
+
+            //        list.Add(model);
+            //        list.Reverse();
+
+
+
+
+            //    }
+            //    ViewBag.Meddelande = "Meddelanden";
+            //    return View(list);
+
+            //}
 
         }
 
-        private string currentUserId()
+
+
+        public IActionResult NewMessage(string id)
+        {
+            Message message = new Message();
+            message.SentFrom = currentUserId();
+           
+            message.SentTo = id;
+
+            return View(message);
+        }
+
+        public async Task<IActionResult> SendMessage (Message message)
+        {
+            message.Read = false;
+            DateTime now = DateTime.Now;
+            message.Date = now;
+
+            var option = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+            };
+            string data = JsonSerializer.Serialize(message, option);
+            var contentData = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await
+                _httpClient.PostAsync($"message", contentData);
+
+            return RedirectToAction("Index", "Home");
+        }
+            private string currentUserId()
         {
             ClaimsPrincipal currentUser = this.User;
             return currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;

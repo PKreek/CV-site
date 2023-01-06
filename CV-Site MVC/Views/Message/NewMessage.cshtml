@@ -1,0 +1,49 @@
+﻿@model Message
+
+
+
+<div class="container">
+    <div class="row">
+        <form class="contact-form" asp-action="SendMessage">
+            <input asp-for="SentTo" type="text" hidden />
+            <div class="row">
+                @{
+
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="col-md-6 mb-1">
+                            <div class="form-group">
+                                <small>från:</small>
+                                <input asp-for="SentFrom" type="text" class="form-control" readonly>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-6 mb-1">
+                            <div class="form-group">
+                                <small>från:</small>
+                                <input asp-for="SentFrom" type="text" class="form-control" placeholder="Namn">
+                            </div>
+                        </div>
+
+
+                    }
+                }
+            </div>
+            <div class="row">
+                <div class="col-md-12 mb-1">
+                    <div class="form-group">
+                        <input asp-for="Text" type="text" class="form-control" placeholder="Meddelande">
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-info pull-right">Skicka</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
