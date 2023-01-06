@@ -9,7 +9,6 @@ using System.Text.Json;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace CV_Site_MVC.Controllers
 {
@@ -43,42 +42,6 @@ namespace CV_Site_MVC.Controllers
             messages.Reverse();
             ViewBag.Meddelande = "Meddelanden";
             return View(messages);
-
-            //    List<Message> listofMessage = JsonSerializer.Deserialize<List<Message>>(data, options).Where(x => x.SentTo == id).ToList();
-
-            //    List<MessageViewModel> list = new List<MessageViewModel>();
-            //    foreach(var message in listofMessage)
-            //    {
-            //        string sender = message.SentFrom;
-            //        string userNameSender = _dbContext.Users.Where(x => x.Id == sender).Select(x => x.UserName).FirstOrDefault();
-            //        string reciever = message.SentTo;
-            //        string userNameReciever = _dbContext.Users.Where(x => x.Id == reciever).Select(x => x.UserName).FirstOrDefault();
-            //        string text = message.Text;
-            //        bool read = message.Read;
-            //        string date = message.Date.ToString();
-            //        int messageID = message.Id;
-
-
-            //        MessageViewModel model = new MessageViewModel();
-            //        model.Sender = userNameSender;
-            //        model.Reciever = userNameReciever;
-            //        model.Text = text;
-            //        model.Read = read;
-            //        model.Date = date;
-            //        model.ID = messageID;
-
-            //        list.Add(model);
-            //        list.Reverse();
-
-
-
-
-            //    }
-            //    ViewBag.Meddelande = "Meddelanden";
-            //    return View(list);
-
-            //}
-
         }
 
 
@@ -131,7 +94,7 @@ namespace CV_Site_MVC.Controllers
                 PropertyNameCaseInsensitive = true,
             };
             Message message = JsonSerializer.Deserialize<Message>(data, options);
-            //Message message = _dbContext.Messages.Find(id);
+
             if (message.Read == true)
             {
                 message.Read = false;
