@@ -17,11 +17,11 @@ namespace CV_Site_MVC.Models
 
       
 
-        [InverseProperty("Message_Sender")]
-        public virtual IEnumerable<Message> Sender { get; set; }
+        //[InverseProperty("Message_Sender")]
+        //public virtual IEnumerable<Message> Sender { get; set; }
 
-        [InverseProperty("Message_Reciever")]
-        public virtual IEnumerable<Message> Reciever { get; set; }
+        //[InverseProperty("Message_Reciever")]
+        //public virtual IEnumerable<Message> Reciever { get; set; }
         //Password?
 
     }
