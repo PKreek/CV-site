@@ -27,8 +27,8 @@ namespace CV_Site_MVC.Controllers
         public async Task<IActionResult> Message()
         {
             var id = currentUserId();
-            var antal = _dbContext.Messages.Where(x => x.Message_Reciever.Id == id).Count(l => l.Read == false);
-            ViewData["Antal meddelande"] = antal;
+            var antal = _dbContext.Messages.Where(x => x.SentTo == id).Count(l => l.Read == false);
+            ViewData["AntalMeddelande"] = antal;
 
             HttpResponseMessage response = await _httpClient.GetAsync("message");
             string data = await response.Content.ReadAsStringAsync();
@@ -145,7 +145,7 @@ namespace CV_Site_MVC.Controllers
         }
 
 
-        private string currentUserId()
+         private string currentUserId()
         {
             ClaimsPrincipal currentUser = this.User;
             return currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;

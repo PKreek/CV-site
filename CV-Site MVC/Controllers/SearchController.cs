@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using System.Security.Claims;
 
 namespace CV_Site_MVC.Controllers
 {
@@ -17,6 +18,9 @@ namespace CV_Site_MVC.Controllers
         // GET: SearchController
         public ActionResult Index(string search)
         {
+                 var id = currentUserId();
+                 var antal = _dbContext.Messages.Where(x => x.SentTo == id).Count(l => l.Read == false);
+                 ViewData["AntalMeddelande"] = antal;
                 SearchViewModel model = new SearchViewModel();
                 model.ListOfCv = _dbContext.cVs.Where(x => x.FirstName.StartsWith(search) || search == null).ToList();
                 return View(model);
@@ -91,6 +95,13 @@ namespace CV_Site_MVC.Controllers
             {
                 return View();
             }
+
+        }
+
+        private string currentUserId()
+        {
+            ClaimsPrincipal currentUser = this.User;
+            return currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
         }
     }
 }

@@ -20,7 +20,10 @@ namespace CV_Site_MVC.Controllers
         }
         public IActionResult Project()
         {
-           
+            var id = currentUserId();
+            var antal = _dbContext.Messages.Where(x => x.SentTo == id).Count(l => l.Read == false);
+            ViewData["AntalMeddelande"] = antal;
+
             return View(new Project());
         }
 
@@ -39,6 +42,9 @@ namespace CV_Site_MVC.Controllers
 
         public IActionResult ListOfProjects()
         {
+            var id = currentUserId();
+            var antal = _dbContext.Messages.Where(x => x.SentTo == id).Count(l => l.Read == false);
+            ViewData["AntalMeddelande"] = antal;
             ProjectViewModel model = new ProjectViewModel();
             model.ProjectList = _dbContext.Projects.ToList();
             model.UserInProjects = _dbContext.Project_Users.ToList();

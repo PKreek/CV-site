@@ -34,6 +34,9 @@ namespace CV_Site_MVC.Controllers
         
         public IActionResult Index()
         {
+            var id = currentUserId();
+            var antal = _dbContext.Messages.Where(x => x.SentTo == id).Count(l => l.Read == false);
+            ViewData["AntalMeddelande"] = antal;
             IndexViewModel model = new IndexViewModel();
             if (_dbContext.Projects.Count() > 0)
             {
@@ -54,7 +57,10 @@ namespace CV_Site_MVC.Controllers
 
         [Authorize]
         public IActionResult Profil()
-        {      
+        {
+                var id = currentUserId();
+                var antal = _dbContext.Messages.Where(x => x.SentTo == id).Count(l => l.Read == false);
+                ViewData["AntalMeddelande"] = antal;
                 var user = currentUserId();
                 ProfileViewModel model = new ProfileViewModel();
                 model.UserInProjects = _dbContext.Project_Users.ToList();

@@ -136,7 +136,9 @@ namespace CV_Site_MVC.Controllers
         [Route("change-password")]
         public IActionResult ChangePassword()
         {
-
+            var id = currentUserId();
+            var antal = _dbContext.Messages.Where(x => x.SentTo == id).Count(l => l.Read == false);
+            ViewData["AntalMeddelande"] = antal;
             return View();
         }
 

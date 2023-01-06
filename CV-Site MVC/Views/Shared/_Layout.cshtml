@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity;
 @inject SignInManager<User> signInManager;
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +33,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Profil">Profil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Message" asp-action="Message">Meddelande</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Message" asp-action="Message">Meddelande(@ViewData["AntalMeddelande"])</a>
                         </li>
                         }
                         else
