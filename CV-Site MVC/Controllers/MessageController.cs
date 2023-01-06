@@ -30,14 +30,14 @@ namespace CV_Site_MVC.Controllers
             var antal = _dbContext.Messages.Where(x => x.Message_Reciever.Id == id).Count(l => l.Read == false);
             ViewData["Antal meddelande"] = antal;
 
-            HttpResponseMessage response = await _httpClient.GetAsync("api/message");
+            HttpResponseMessage response = await _httpClient.GetAsync("message");
             string data = await response.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
             };
 
-            List<Message> listofMessage = JsonSerializer.Deserialize<List<Message>>(data, options).Where(x => x.Message_Reciever.Id == id).ToList();
+            List<Message> listofMessage = JsonSerializer.Deserialize<List<Message>>(data, options).Where(x => x.SentTo == id).ToList();
 
             List<MessageViewModel> list = new List<MessageViewModel>();
             foreach(var message in listofMessage)
