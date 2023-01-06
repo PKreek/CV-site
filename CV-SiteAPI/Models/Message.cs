@@ -6,17 +6,16 @@ namespace CV_SiteAPI.Models
 {
     public class Message
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
         public int Id { get; set; }
         public string Text { get; set; }
         public DateTime Date { get; set; }
         public string SentTo { get; set; }
         public string SentFrom { get; set; }
+        public bool Read { get; set; }  
 
-        public bool Read { get; set; }
-
-        [ForeignKey(nameof(SentTo))]
-        public virtual User Message_Reciever { get; set; }
+        //[ForeignKey(nameof(SentTo))]
+        //public virtual User Message_Reciever  { get; set; }
 
         //[ForeignKey(nameof(SentFrom))]
         //public virtual User Message_Sender { get; set; }
