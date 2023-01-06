@@ -27,7 +27,6 @@ namespace CV_Site_MVC.Controllers
         {
             CvViewModel model = new CvViewModel();
 
-            //model.UserID = currentUserId();
             model.UserID = id;
 
             CV cv = _dbContext.cVs.Where(c => c.UserID.Equals(id)).FirstOrDefault<CV>();
@@ -46,9 +45,12 @@ namespace CV_Site_MVC.Controllers
             model.Skills = _dbContext.Skills.Where(s => s.CVId.Equals(model.Cv.ID)).ToList<Skill>();
             model.Educations = _dbContext.Educations.Where(s => s.CVId.Equals(model.Cv.ID)).ToList<Education>();
             model.Works = _dbContext.Works.Where(w => _dbContext.Work_CVs
-                    .Where(c => c.CVID.Equals(model.Cv.ID))
-                    .Select(i => i.WorkID).Contains(w.Id)).ToList();
+                .Where(c => c.CVID.Equals(model.Cv.ID))
+                .Select(i => i.WorkID).Contains(w.Id)).ToList();
             model.CvUser = _dbContext.Users.Where(u => u.Id.Equals(model.UserID)).First();
+            model.Projects = _dbContext.Projects.Where(p => _dbContext.Project_Users
+                .Where(pu => pu.UserID.Equals(id))
+                .Select(i => i.ProjektID).Contains(p.Id)).ToList();
 
             if (User.Identity.IsAuthenticated)
                 model.IsMyCv = id.Equals(currentUserId()) ? true : false;

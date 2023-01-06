@@ -140,3 +140,23 @@
 {
 	<a asp-controller="CV" asp-action="Work" asp-route-id="@Model.Cv.ID">Ändra uppgifter</a>
 }
+
+<h2>Projektdeltagande</h2>
+
+<div>
+	<table class="table-bordered">
+		<thead>
+			<tr>
+				<td>Projekt</td>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var projekt in Model.Projects)
+			{
+				<tr>
+					<td>@projekt.ProjectName</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>
