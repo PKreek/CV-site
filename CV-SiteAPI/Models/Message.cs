@@ -14,10 +14,5 @@ namespace CV_SiteAPI.Models
         public string SentFrom { get; set; }
         public bool Read { get; set; }  
 
-        //[ForeignKey(nameof(SentTo))]
-        //public virtual User Message_Reciever  { get; set; }
-
-        //[ForeignKey(nameof(SentFrom))]
-        //public virtual User Message_Sender { get; set; }
     }
 }
