@@ -111,7 +111,41 @@ namespace CV_Site_MVC.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-            private string currentUserId()
+
+        public async Task<IActionResult> messageRead(int id)
+        {
+
+            HttpResponseMessage response = await _httpClient.GetAsync($"Message/{id}");
+
+            string data = await response.Content.ReadAsStringAsync();
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+            };
+            Message message = JsonSerializer.Deserialize<Message>(data, options);
+            //Message message = _dbContext.Messages.Find(id);
+            if (message.Read == true)
+            {
+                message.Read = false;
+
+            }
+            else
+            {
+                message.Read = true;
+              
+            }
+
+            string putData = JsonSerializer.Serialize(message);
+            var contentData = new StringContent(putData, System.Text.Encoding.UTF8, "application/json");
+
+            HttpResponseMessage putResponse = await
+                _httpClient.PutAsync($"Message/{message.Id}", contentData);
+
+            return RedirectToAction("Message", "Message");
+        }
+
+
+        private string currentUserId()
         {
             ClaimsPrincipal currentUser = this.User;
             return currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;

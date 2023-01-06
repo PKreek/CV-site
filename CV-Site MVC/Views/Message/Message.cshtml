@@ -21,13 +21,13 @@
                     <td>
                         @if(item.Read == false)
                         {
-                            <form asp-controller="" asp-action="" asp-route-id="@item.Id">
+                            <form asp-controller="Message" asp-action="messageRead" asp-route-id="@item.Id">
                                 <button type="submit">Markera som läst</button>
                             </form>
                         }
                         else
                         {
-                            <form asp-controller="" asp-action="" asp-route-id="@item.Id">
+                            <form asp-controller="Message" asp-action="messageRead" asp-route-id="@item.Id">
                                 <button type="submit">Markera som oläst</button>
                             </form>
                         }
