@@ -1,7 +1,5 @@
 ﻿@model SearchViewModel
 
-@*@model IEnumerable<CV_Site_MVC.Models.CV>*@
-
 @{
     ViewBag.Title = "Index";
 }
@@ -11,9 +9,6 @@
         @using (@Html.BeginForm("Index", "Search", FormMethod.Get))
         {
             <b>Sök på förnamn:</b>
-    @*        @Html.RadioButton("searchBy", "UserName", true) <text>Name</text>
-           @Html.RadioButton("searchBy", "Gender") <text>Gender</text>*@
-
             <br />
             @Html.TextBox("search") <input type="submit" value="Sök" />
         }
