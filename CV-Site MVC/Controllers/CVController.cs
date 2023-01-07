@@ -25,13 +25,6 @@ namespace CV_Site_MVC.Controllers
         [HttpGet]
         public IActionResult CV(string id)
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                var countID = currentUserId();
-                var antal = _dbContext.Messages.Where(x => x.SentTo == countID).Count(l => l.Read == false);
-                ViewData["AntalMeddelande"] = antal;
-            }
-
             CvViewModel model = new CvViewModel();
 
             model.UserID = id;
@@ -60,8 +53,14 @@ namespace CV_Site_MVC.Controllers
                 .Select(i => i.ProjektID).Contains(p.Id)).ToList();
 
             if (User.Identity.IsAuthenticated)
+            {
                 model.IsMyCv = id.Equals(currentUserId()) ? true : false;
 
+                var countID = currentUserId();
+                var antal = _dbContext.Messages.Where(x => x.SentTo == countID).Count(l => l.Read == false);
+                ViewData["AntalMeddelande"] = antal;
+            }
+            
             return View(model);
         }
 

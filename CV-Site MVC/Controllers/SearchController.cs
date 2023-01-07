@@ -18,9 +18,13 @@ namespace CV_Site_MVC.Controllers
         // GET: SearchController
         public ActionResult Index(string search)
         {
-            var id = currentUserId();
-            var antal = _dbContext.Messages.Where(x => x.SentTo == id).Count(l => l.Read == false);
-            ViewData["AntalMeddelande"] = antal;
+            if (User.Identity.IsAuthenticated)
+            {
+                var id = currentUserId();
+                var antal = _dbContext.Messages.Where(x => x.SentTo == id).Count(l => l.Read == false);
+                ViewData["AntalMeddelande"] = antal;
+            }
+
             SearchViewModel model = new SearchViewModel();
             model.ListOfCv = _dbContext.cVs.Where(x => x.FirstName.StartsWith(search) || search == null).ToList();
             return View(model);   
@@ -93,7 +97,6 @@ namespace CV_Site_MVC.Controllers
             {
                 return View();
             }
-
         }
 
         private string currentUserId()
