@@ -15,7 +15,6 @@ namespace CV_Site_MVC.Controllers
             _dbContext = dbContext;
         }
 
-        // GET: SearchController
         public ActionResult Index(string search)
         {
             if (User.Identity.IsAuthenticated)
@@ -30,19 +29,16 @@ namespace CV_Site_MVC.Controllers
             return View(model);   
         }
 
-        // GET: SearchController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: SearchController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: SearchController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -57,13 +53,11 @@ namespace CV_Site_MVC.Controllers
             }
         }
 
-        // GET: SearchController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: SearchController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
