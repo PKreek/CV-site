@@ -56,7 +56,7 @@ namespace CV_Site_MVC.Controllers
             }
             else
             {
-                message.SentFrom = "Avsändare";
+                message.SentFrom = "Namn";
             }
 
             message.SentTo = id;
