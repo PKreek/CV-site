@@ -39,9 +39,9 @@ namespace CV_Site_MVC
             //clientHandler.ServerCertificateCustomValidationCallback = ()
 
             HttpClient client = new HttpClient(clientHandler);
-            client.BaseAddress = new Uri("https://localhost:13756/api/");
+            client.BaseAddress = new Uri("https://localhost:44381/api/");
 
-            //https://localhost:13756/api/message
+        //https://localhost:44381/api/message
 
             services.AddSingleton<HttpClient>(client);
         }
